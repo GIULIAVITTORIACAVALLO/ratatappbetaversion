@@ -1,31 +1,29 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const inputParola = document.getElementById("parola");
-    const cercaButton = document.getElementById("cercaRime");
-    const outputRime = document.getElementById("outputRime");
+    const parolaInput = document.getElementById("parola");
+    const trovaBtn = document.getElementById("trova");
+    const output = document.getElementById("output");
 
-    async function trovaRime(parola) {
-        outputRime.textContent = "Sto cercando rime...";
+    async function trovaRime() {
+        const parola = parolaInput.value.trim().toLowerCase();
+        if (!parola) {
+            output.textContent = "Inserisci una parola!";
+            return;
+        }
 
         try {
-            let response = await fetch(`https://rime-cercatore-api.com/rime?parola=${parola}`);
-            let dati = await response.json();
+            const response = await fetch(`https://api.datamuse.com/words?rel_rhy=${parola}`);
+            const data = await response.json();
 
-            if (dati.rime.length > 0) {
-                outputRime.innerHTML = `<strong>Rime trovate:</strong> ${dati.rime.join(", ")}`;
+            if (data.length === 0) {
+                output.textContent = "Nessuna rima trovata.";
             } else {
-                outputRime.textContent = "Nessuna rima trovata.";
+                const rime = data.map(word => word.word);
+                output.innerHTML = "<strong>Rime trovate:</strong> " + rime.join(", ");
             }
         } catch (error) {
-            outputRime.textContent = "Errore nel recupero delle rime.";
+            output.textContent = "Errore nel recupero delle rime.";
         }
     }
 
-    cercaButton.addEventListener("click", function () {
-        let parola = inputParola.value.trim().toLowerCase();
-        if (parola) {
-            trovaRime(parola);
-        } else {
-            outputRime.textContent = "Inserisci una parola per cercare rime.";
-        }
-    });
+    trovaBtn.addEventListener("click", trovaRime);
 });
