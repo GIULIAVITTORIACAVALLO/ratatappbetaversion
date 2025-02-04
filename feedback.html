@@ -1,1 +1,22 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <h1>Lascia un Feedback</h1>
+    <form id="feedbackForm">
+        <input type="text" id="nome" placeholder="Il tuo nome" required>
+        <textarea id="commento" placeholder="Scrivi il tuo feedback..." required></textarea>
+        <button type="submit">Invia</button>
+    </form>
 
+    <h2>Feedback degli utenti</h2>
+    <div id="listaFeedback"></div>
+
+    <script src="js/feedback.js"></script>
+</body>
+</html>
