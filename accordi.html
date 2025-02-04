@@ -1,4 +1,3 @@
-<!-- Accordions Page -->
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -8,18 +7,21 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <header>
-        <h1>Generatore di Accordi</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <button onclick="generaProgressione()">Genera Progressione</button>
-        <p id="outputAccordi"></p>
-    </main>
+    <h1>Generatore di Progressioni di Accordi</h1>
+    <label for="tonalita">Seleziona una tonalità:</label>
+    <select id="tonalita">
+        <option value="C">Do Maggiore</option>
+        <option value="G">Sol Maggiore</option>
+        <option value="D">Re Maggiore</option>
+        <option value="A">La Maggiore</option>
+        <option value="E">Mi Maggiore</option>
+        <option value="B">Si Maggiore</option>
+        <option value="F#">Fa# Maggiore</option>
+        <option value="Db">Reb Maggiore</option>
+    </select>
+    <button onclick="generaProgressione()">Genera Progressione</button>
+    <p id="output"></p>
+    
     <script src="js/accordi.js"></script>
 </body>
 </html>
