@@ -11,13 +11,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         try {
-            const response = await fetch(`https://api.datamuse.com/words?rel_rhy=${parola}`);
+            // Usa un'alternativa per trovare rime
+            const response = await fetch(`https://rhymebrain.com/talk?function=getRhymes&word=${parola}`);
             const data = await response.json();
 
             if (data.length === 0) {
                 output.textContent = "Nessuna rima trovata.";
             } else {
-                const rime = data.map(word => word.word);
+                const rime = data.map(entry => entry.word);
                 output.innerHTML = "<strong>Rime trovate:</strong> " + rime.join(", ");
             }
         } catch (error) {
