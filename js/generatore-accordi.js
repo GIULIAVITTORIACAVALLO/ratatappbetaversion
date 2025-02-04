@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+window.onload = function () {
     const tonalitaSelect = document.getElementById("tonalita");
     const tipoSelect = document.getElementById("tipo");
     const generaBtn = document.getElementById("genera");
@@ -50,4 +50,4 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     generaBtn.addEventListener("click", generaProgressione);
-});
+};
