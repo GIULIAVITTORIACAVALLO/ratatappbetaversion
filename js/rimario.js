@@ -1,44 +1,31 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const parolaInput = document.getElementById("parola");
-    const trovaBtn = document.getElementById("trova");
-    const risultato = document.getElementById("risultato");
+    const inputParola = document.getElementById("parola");
+    const cercaButton = document.getElementById("cercaRime");
+    const outputRime = document.getElementById("outputRime");
 
-    // Dizionario di rime base (da espandere con un database API in futuro)
-    const dizionarioRime = {
-        "amore": ["fiore", "cuore", "errore", "rumore", "calore", "favore"],
-        "sole": ["cuole", "mole", "viole", "scuole"],
-        "mare": ["amare", "sognare", "cantare", "volare", "parlare"],
-        "notte": ["rotte", "botte", "lotte", "sotto"],
-        "cielo": ["velo", "anello", "bello", "castello"]
-    };
+    async function trovaRime(parola) {
+        outputRime.textContent = "Sto cercando rime...";
 
-    function trovaRime() {
-        let parola = parolaInput.value.toLowerCase();
-        let rimePerfette = dizionarioRime[parola] || [];
-        let rimeAssonanti = [];
-        let rimeConsonanti = [];
+        try {
+            let response = await fetch(`https://rime-cercatore-api.com/rime?parola=${parola}`);
+            let dati = await response.json();
 
-        if (rimePerfette.length === 0) {
-            for (let chiave in dizionarioRime) {
-                if (chiave.endsWith(parola.slice(-2))) {
-                    rimeAssonanti.push(...dizionarioRime[chiave]);
-                }
-                if (chiave.includes(parola.slice(0, 2))) {
-                    rimeConsonanti.push(...dizionarioRime[chiave]);
-                }
+            if (dati.rime.length > 0) {
+                outputRime.innerHTML = `<strong>Rime trovate:</strong> ${dati.rime.join(", ")}`;
+            } else {
+                outputRime.textContent = "Nessuna rima trovata.";
             }
-        }
-
-        if (rimePerfette.length > 0 || rimeAssonanti.length > 0 || rimeConsonanti.length > 0) {
-            risultato.innerHTML = `
-                <strong>Rime Perfette:</strong> ${rimePerfette.join(", ")}<br>
-                <strong>Rime Assonanti:</strong> ${rimeAssonanti.join(", ")}<br>
-                <strong>Rime Consonanti:</strong> ${rimeConsonanti.join(", ")}
-            `;
-        } else {
-            risultato.innerText = "Nessuna rima trovata!";
+        } catch (error) {
+            outputRime.textContent = "Errore nel recupero delle rime.";
         }
     }
 
-    trovaBtn.addEventListener("click", trovaRime);
+    cercaButton.addEventListener("click", function () {
+        let parola = inputParola.value.trim().toLowerCase();
+        if (parola) {
+            trovaRime(parola);
+        } else {
+            outputRime.textContent = "Inserisci una parola per cercare rime.";
+        }
+    });
 });
