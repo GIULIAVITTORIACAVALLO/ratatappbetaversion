@@ -1,29 +1,33 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const parolaInput = document.getElementById("parola");
-    const trovaBtn = document.getElementById("trova");
-    const output = document.getElementById("output");
+    const trovaRimeButton = document.getElementById("trovaRime");
+    const parolaInput = document.getElementById("parolaInput");
+    const risultatiDiv = document.getElementById("risultatiRime");
 
-    async function trovaRime() {
+    // Funzione per trovare rime
+    trovaRimeButton.addEventListener("click", function () {
         const parola = parolaInput.value.trim().toLowerCase();
-        if (!parola) {
-            output.textContent = "Inserisci una parola!";
+        if (parola === "") {
+            risultatiDiv.innerHTML = "<p>Inserisci una parola per trovare le rime.</p>";
             return;
         }
 
-        try {
-            const response = await fetch(`https://rhymebrain.com/talk?function=getRhymes&word=${parola}`);
-            const data = await response.json();
-
-            if (data.length === 0) {
-                output.textContent = "Nessuna rima trovata.";
-            } else {
-                const rime = data.map(entry => entry.word);
-                output.innerHTML = "<strong>Rime trovate:</strong> " + rime.join(", ");
-            }
-        } catch (error) {
-            output.textContent = "Errore nel recupero delle rime.";
-        }
-    }
-
-    trovaBtn.addEventListener("click", trovaRime);
+        fetch(`https://rimar.io/api/${parola}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    let html = "<h3>Rime trovate:</h3><ul>";
+                    data.forEach(rima => {
+                        html += `<li>${rima}</li>`;
+                    });
+                    html += "</ul>";
+                    risultatiDiv.innerHTML = html;
+                } else {
+                    risultatiDiv.innerHTML = "<p>Nessuna rima trovata.</p>";
+                }
+            })
+            .catch(error => {
+                console.error("Errore nella ricerca delle rime:", error);
+                risultatiDiv.innerHTML = "<p>Errore nella ricerca delle rime.</p>";
+            });
+    });
 });
