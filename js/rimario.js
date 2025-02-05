@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         try {
-            // Usa un'alternativa per trovare rime
             const response = await fetch(`https://rhymebrain.com/talk?function=getRhymes&word=${parola}`);
             const data = await response.json();
 
