@@ -1,50 +1,35 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const tonalitaSelect = document.getElementById("tonalita");
-    const tipoSelect = document.getElementById("tipo");
-    const generaBtn = document.getElementById("genera");
-    const output = document.getElementById("output");
+document.getElementById("generaAccordi").addEventListener("click", function () {
+    const tonalita = document.getElementById("tonalita").value;
+    const tipoScala = document.getElementById("tipoScala").value;
 
     const scale = {
-        maggiori: {
-            "Do": ["C", "Dm", "Em", "F", "G", "Am", "Bdim"],
-            "Re": ["D", "Em", "F#m", "G", "A", "Bm", "C#dim"],
-            "Mi": ["E", "F#m", "G#m", "A", "B", "C#m", "D#dim"],
-            "Fa": ["F", "Gm", "Am", "Bb", "C", "Dm", "Edim"],
-            "Sol": ["G", "Am", "Bm", "C", "D", "Em", "F#dim"],
-            "La": ["A", "Bm", "C#m", "D", "E", "F#m", "G#dim"],
-            "Si": ["B", "C#m", "D#m", "E", "F#", "G#m", "A#dim"]
+        maggiore: {
+            C: ["C", "D", "E", "F", "G", "A", "B"],
+            D: ["D", "E", "F#", "G", "A", "B", "C#"],
+            E: ["E", "F#", "G#", "A", "B", "C#", "D#"],
+            F: ["F", "G", "A", "A#", "C", "D", "E"],
+            G: ["G", "A", "B", "C", "D", "E", "F#"],
+            A: ["A", "B", "C#", "D", "E", "F#", "G#"],
+            B: ["B", "C#", "D#", "E", "F#", "G#", "A#"],
         },
-        minori: {
-            "Lam": ["Am", "Bdim", "C", "Dm", "Em", "F", "G"],
-            "Sim": ["Bm", "C#dim", "D", "Em", "F#m", "G", "A"],
-            "Dom": ["Cm", "Ddim", "Eb", "Fm", "Gm", "Ab", "Bb"],
-            "Rem": ["Dm", "Edim", "F", "Gm", "Am", "Bb", "C"],
-            "Mim": ["Em", "F#dim", "G", "Am", "Bm", "C", "D"],
-            "Fam": ["Fm", "Gdim", "Ab", "Bbm", "Cm", "Db", "Eb"],
-            "Solm": ["Gm", "Adim", "Bb", "Cm", "Dm", "Eb", "F"]
-        }
+        minore: {
+            C: ["Cm", "Ddim", "D#", "Fm", "Gm", "G#", "A#"],
+            D: ["Dm", "Edim", "F", "Gm", "Am", "A#", "C"],
+            E: ["Em", "F#dim", "G", "Am", "Bm", "C", "D"],
+            F: ["Fm", "Gdim", "G#", "A#m", "Cm", "C#", "D#"],
+            G: ["Gm", "Adim", "A#", "Cm", "Dm", "D#", "F"],
+            A: ["Am", "Bdim", "C", "Dm", "Em", "F", "G"],
+            B: ["Bm", "C#dim", "D", "Em", "F#m", "G", "A"],
+        },
     };
 
-    function generaProgressione() {
-        const tonalita = tonalitaSelect.value;
-        const tipo = tipoSelect.value;
-        const scala = scale[tipo][tonalita];
-
-        if (!scala) {
-            output.textContent = "Errore: Seleziona una tonalità e un tipo validi.";
-            return;
-        }
-
-        let progressione = [];
-        while (progressione.length < 4) {
-            let index = Math.floor(Math.random() * scala.length);
-            if (!progressione.includes(scala[index])) {
-                progressione.push(scala[index]);
-            }
-        }
-
-        output.textContent = "Progressione generata: " + progressione.join(" - ");
+    const progressione = [];
+    const scalaSelezionata = scale[tipoScala][tonalita];
+    
+    for (let i = 0; i < 4; i++) {
+        let accordoCasuale = scalaSelezionata[Math.floor(Math.random() * scalaSelezionata.length)];
+        progressione.push(accordoCasuale);
     }
 
-    generaBtn.addEventListener("click", generaProgressione);
+    document.getElementById("risultatoAccordi").innerText = progressione.join(" - ");
 });
