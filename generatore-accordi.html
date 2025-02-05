@@ -3,44 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generatore di Progressioni di Accordi</title>
+    <title>Generatore di Accordi</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <h1>Generatore di Progressioni di Accordi</h1>
-    
-    <label for="tonalita">Scegli una tonalità:</label>
+    <label for="tonalita">Scegli la tonalità:</label>
     <select id="tonalita">
         <option value="C">Do Maggiore</option>
         <option value="Cm">Do Minore</option>
-        <option value="C#">Do# Maggiore</option>
-        <option value="C#m">Do# Minore</option>
         <option value="D">Re Maggiore</option>
         <option value="Dm">Re Minore</option>
-        <option value="D#">Re# Maggiore</option>
-        <option value="D#m">Re# Minore</option>
         <option value="E">Mi Maggiore</option>
         <option value="Em">Mi Minore</option>
         <option value="F">Fa Maggiore</option>
         <option value="Fm">Fa Minore</option>
-        <option value="F#">Fa# Maggiore</option>
-        <option value="F#m">Fa# Minore</option>
         <option value="G">Sol Maggiore</option>
         <option value="Gm">Sol Minore</option>
-        <option value="G#">Sol# Maggiore</option>
-        <option value="G#m">Sol# Minore</option>
         <option value="A">La Maggiore</option>
         <option value="Am">La Minore</option>
-        <option value="A#">La# Maggiore</option>
-        <option value="A#m">La# Minore</option>
         <option value="B">Si Maggiore</option>
         <option value="Bm">Si Minore</option>
     </select>
-
-    <button id="generaAccordi">Genera Progressione</button>
-
-    <h2>Progressione generata:</h2>
-    <div id="progressioneOutput"></div>
+    <button onclick="generaAccordi()">Genera Progressione</button>
+    <p id="outputAccordi"></p>
 
     <script src="js/generatore-accordi.js"></script>
 </body>
