@@ -1,4 +1,4 @@
-window.onload = function () {
+document.addEventListener("DOMContentLoaded", function () {
     const tonalitaSelect = document.getElementById("tonalita");
     const tipoSelect = document.getElementById("tipo");
     const generaBtn = document.getElementById("genera");
@@ -31,17 +31,14 @@ window.onload = function () {
         const scala = scale[tipo][tonalita];
 
         if (!scala) {
-            output.textContent = "Seleziona una tonalità valida.";
+            output.textContent = "Errore: Seleziona una tonalità e un tipo validi.";
             return;
         }
 
         let progressione = [];
-        let usedIndexes = new Set();
-
         while (progressione.length < 4) {
             let index = Math.floor(Math.random() * scala.length);
-            if (!usedIndexes.has(index)) {
-                usedIndexes.add(index);
+            if (!progressione.includes(scala[index])) {
                 progressione.push(scala[index]);
             }
         }
@@ -50,4 +47,4 @@ window.onload = function () {
     }
 
     generaBtn.addEventListener("click", generaProgressione);
-};
+});
