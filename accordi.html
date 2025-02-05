@@ -3,25 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generatore di Accordi</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Generatore di Accordi - RATATAPP</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Generatore di Progressioni di Accordi</h1>
-    <label for="tonalita">Seleziona una tonalità:</label>
-    <select id="tonalita">
-        <option value="C">Do Maggiore</option>
-        <option value="G">Sol Maggiore</option>
-        <option value="D">Re Maggiore</option>
-        <option value="A">La Maggiore</option>
-        <option value="E">Mi Maggiore</option>
-        <option value="B">Si Maggiore</option>
-        <option value="F#">Fa# Maggiore</option>
-        <option value="Db">Reb Maggiore</option>
-    </select>
-    <button onclick="generaProgressione()">Genera Progressione</button>
-    <p id="output"></p>
-    
-   <script src="js/generatore-accordi.js"></script>
+
+    <header>
+        <h1>Generatore di Progressioni di Accordi</h1>
+        <a href="index.html">Home</a>
+    </header>
+
+    <main>
+        <label for="tonalita">Seleziona tonalità:</label>
+        <select id="tonalita">
+            <option value="Do">Do</option>
+            <option value="Re">Re</option>
+            <option value="Mi">Mi</option>
+            <option value="Fa">Fa</option>
+            <option value="Sol">Sol</option>
+            <option value="La">La</option>
+            <option value="Si">Si</option>
+            <option value="Lam">Lam</option>
+            <option value="Sim">Sim</option>
+            <option value="Dom">Dom</option>
+            <option value="Rem">Rem</option>
+            <option value="Mim">Mim</option>
+            <option value="Fam">Fam</option>
+            <option value="Solm">Solm</option>
+        </select>
+
+        <label for="tipo">Tipo di scala:</label>
+        <select id="tipo">
+            <option value="maggiori">Maggiore</option>
+            <option value="minori">Minore</option>
+        </select>
+
+        <button id="genera">Genera Progressione</button>
+
+        <div id="output"></div>
+    </main>
+
+    <script src="js/generatore-accordi.js"></script>
 </body>
 </html>
