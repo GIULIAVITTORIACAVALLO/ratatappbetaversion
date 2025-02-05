@@ -3,15 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rimario</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Rimario - RATATAPP</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Rimario</h1>
-    <input type="text" id="parola" placeholder="Inserisci una parola">
-    <button onclick="trovaRime()">Trova Rime</button>
-    <p id="risultati"></p>
-    
+
+    <header>
+        <h1>Trova Rime</h1>
+        <a href="index.html">Home</a>
+    </header>
+
+    <main>
+        <label for="parola">Inserisci una parola:</label>
+        <input type="text" id="parola" placeholder="Scrivi una parola">
+        <button id="trova">Trova Rime</button>
+
+        <div id="output"></div>
+    </main>
+
     <script src="js/rimario.js"></script>
 </body>
 </html>
