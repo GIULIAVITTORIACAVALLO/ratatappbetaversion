@@ -1,22 +1,36 @@
-function generaAccordi() {
-    const tonalita = document.getElementById("tonalita").value;
-    const progressioni = {
-        "C": [["C", "G", "Am", "F"], ["C", "Em", "F", "G"], ["C", "Am", "Dm", "G"]],
-        "Cm": [["Cm", "Ab", "Bb", "Eb"], ["Cm", "Gm", "Ab", "Bb"], ["Cm", "Fm", "G", "Cm"]],
-        "D": [["D", "A", "Bm", "G"], ["D", "F#m", "G", "A"], ["D", "Bm", "Em", "A"]],
-        "Dm": [["Dm", "Bb", "C", "F"], ["Dm", "Am", "Bb", "C"], ["Dm", "Gm", "A", "Dm"]],
-        "E": [["E", "B", "C#m", "A"], ["E", "G#m", "A", "B"], ["E", "C#m", "F#m", "B"]],
-        "Em": [["Em", "C", "D", "G"], ["Em", "Bm", "C", "D"], ["Em", "Am", "B", "Em"]],
-        "F": [["F", "C", "Dm", "Bb"], ["F", "Am", "Bb", "C"], ["F", "Dm", "Gm", "C"]],
-        "Fm": [["Fm", "Db", "Eb", "Ab"], ["Fm", "Cm", "Db", "Eb"], ["Fm", "Bbm", "C", "Fm"]],
-        "G": [["G", "D", "Em", "C"], ["G", "Bm", "C", "D"], ["G", "Em", "Am", "D"]],
-        "Gm": [["Gm", "Eb", "F", "Bb"], ["Gm", "Dm", "Eb", "F"], ["Gm", "Cm", "D", "Gm"]],
-        "A": [["A", "E", "F#m", "D"], ["A", "C#m", "D", "E"], ["A", "F#m", "Bm", "E"]],
-        "Am": [["Am", "F", "G", "C"], ["Am", "Em", "F", "G"], ["Am", "Dm", "E", "Am"]],
-        "B": [["B", "F#", "G#m", "E"], ["B", "D#m", "E", "F#"], ["B", "G#m", "C#m", "F#"]],
-        "Bm": [["Bm", "G", "A", "D"], ["Bm", "F#m", "G", "A"], ["Bm", "Em", "F#", "Bm"]]
-    };
+// Mappa degli accordi per ogni tonalità con progressioni armoniche
+const progressioni = {
+    "C": [["C", "Am", "F", "G"], ["C", "Em", "Am", "F"], ["C", "G", "Am", "F"]],
+    "A": [["Am", "F", "C", "G"], ["Am", "D", "G", "C"], ["Am", "Em", "F", "C"]],
+    "G": [["G", "Em", "C", "D"], ["G", "Bm", "C", "D"], ["G", "D", "Em", "C"]],
+    "E": [["Em", "C", "G", "D"], ["Em", "Am", "D", "G"], ["Em", "B7", "C", "G"]],
+    "D": [["D", "Bm", "G", "A"], ["D", "F#m", "G", "A"], ["D", "A", "Bm", "G"]],
+    "B": [["Bm", "G", "D", "A"], ["Bm", "E", "A", "D"], ["Bm", "F#m", "G", "D"]],
+    "F": [["F", "Dm", "Bb", "C"], ["F", "Am", "Bb", "C"], ["F", "C", "Dm", "Bb"]],
+    "D#": [["D#m", "B", "F#", "C#"], ["D#m", "A#", "B", "F#"], ["D#m", "G#m", "C#", "F#"]]
+};
 
+// Funzione per generare una progressione casuale
+function generaProgressione() {
+    const tonalita = document.getElementById("tonalita").value;
+    const genere = document.getElementById("genere").value;
+    
+    if (!progressioni[tonalita]) {
+        document.getElementById("accordi").innerText = "Nessuna progressione disponibile per questa tonalità.";
+        return;
+    }
+
+    // Seleziona casualmente una progressione dalla tonalità scelta
     const progressioneCasuale = progressioni[tonalita][Math.floor(Math.random() * progressioni[tonalita].length)];
-    document.getElementById("outputAccordi").innerText = "Progressione: " + progressioneCasuale.join(" - ");
+
+    // Aggiungi variazioni in base al genere musicale
+    let progressioneModificata = [...progressioneCasuale];
+    if (genere === "jazz") {
+        progressioneModificata = progressioneCasuale.map(acc => acc + "7"); // Accordi con settime
+    } else if (genere === "rock") {
+        progressioneModificata = progressioneCasuale.map(acc => acc.replace("m", "5")); // Power chords
+    }
+
+    // Mostra la progressione generata
+    document.getElementById("accordi").innerText = progressioneModificata.join(" - ");
 }
