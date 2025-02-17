@@ -1,36 +1,67 @@
-// Mappa degli accordi per ogni tonalità con progressioni armoniche
-const progressioni = {
-    "C": [["C", "Am", "F", "G"], ["C", "Em", "Am", "F"], ["C", "G", "Am", "F"]],
-    "A": [["Am", "F", "C", "G"], ["Am", "D", "G", "C"], ["Am", "Em", "F", "C"]],
-    "G": [["G", "Em", "C", "D"], ["G", "Bm", "C", "D"], ["G", "D", "Em", "C"]],
-    "E": [["Em", "C", "G", "D"], ["Em", "Am", "D", "G"], ["Em", "B7", "C", "G"]],
-    "D": [["D", "Bm", "G", "A"], ["D", "F#m", "G", "A"], ["D", "A", "Bm", "G"]],
-    "B": [["Bm", "G", "D", "A"], ["Bm", "E", "A", "D"], ["Bm", "F#m", "G", "D"]],
-    "F": [["F", "Dm", "Bb", "C"], ["F", "Am", "Bb", "C"], ["F", "C", "Dm", "Bb"]],
-    "D#": [["D#m", "B", "F#", "C#"], ["D#m", "A#", "B", "F#"], ["D#m", "G#m", "C#", "F#"]]
-};
+document.addEventListener("DOMContentLoaded", function () {
+    const tonalitaSelect = document.getElementById("tonalita");
+    const genereSelect = document.getElementById("genere");
+    const generaButton = document.getElementById("genera");
+    const risultatoDiv = document.getElementById("risultato");
 
-// Funzione per generare una progressione casuale
-function generaProgressione() {
-    const tonalita = document.getElementById("tonalita").value;
-    const genere = document.getElementById("genere").value;
-    
-    if (!progressioni[tonalita]) {
-        document.getElementById("accordi").innerText = "Nessuna progressione disponibile per questa tonalità.";
-        return;
+    // Definizione delle tonalità con le loro scale armoniche
+    const tonalita = {
+        "Do maggiore": ["C", "D", "E", "F", "G", "A", "B"],
+        "La minore": ["Am", "Bdim", "C", "D", "Em", "F", "G"],
+        "Sol maggiore": ["G", "A", "B", "C", "D", "E", "F#"],
+        "Mi minore": ["Em", "F#dim", "G", "A", "Bm", "C", "D"],
+        "Re maggiore": ["D", "E", "F#", "G", "A", "B", "C#"],
+        "Si minore": ["Bm", "C#dim", "D", "E", "F#m", "G", "A"],
+        "La maggiore": ["A", "B", "C#", "D", "E", "F#", "G#"],
+        "Fa# minore": ["F#m", "G#dim", "A", "B", "C#m", "D", "E"],
+        "Mi maggiore": ["E", "F#", "G#", "A", "B", "C#", "D#"],
+        "Do# minore": ["C#m", "D#dim", "E", "F#", "G#m", "A", "B"],
+        "Si maggiore": ["B", "C#", "D#", "E", "F#", "G#", "A#"],
+        "Sol# minore": ["G#m", "A#dim", "B", "C#", "D#m", "E", "F#"],
+        "Fa maggiore": ["F", "G", "A", "Bb", "C", "D", "E"],
+        "Re minore": ["Dm", "Edim", "F", "G", "Am", "Bb", "C"],
+        "Sib maggiore": ["Bb", "C", "D", "Eb", "F", "G", "A"],
+        "Sol minore": ["Gm", "Adim", "Bb", "C", "Dm", "Eb", "F"],
+        "Mib maggiore": ["Eb", "F", "G", "Ab", "Bb", "C", "D"],
+        "Do minore": ["Cm", "Ddim", "Eb", "F", "Gm", "Ab", "Bb"],
+        "Lab maggiore": ["Ab", "Bb", "C", "Db", "Eb", "F", "G"],
+        "Fa minore": ["Fm", "Gdim", "Ab", "Bb", "Cm", "Db", "Eb"],
+        "Reb maggiore": ["Db", "Eb", "F", "Gb", "Ab", "Bb", "C"],
+        "Sib minore": ["Bbm", "Cdim", "Db", "Eb", "Fm", "Gb", "Ab"],
+        "Solb maggiore": ["Gb", "Ab", "Bb", "Cb", "Db", "Eb", "F"],
+        "Mib minore": ["Ebm", "Fdim", "Gb", "Ab", "Bbm", "Cb", "Db"]
+    };
+
+    // Funzione per generare una progressione armonica casuale
+    function generaProgressione() {
+        const tonalitaScelta = tonalitaSelect.value;
+        const genereScelto = genereSelect.value;
+
+        if (!tonalitaScelta || !genereScelto) {
+            risultatoDiv.innerHTML = "Seleziona una tonalità e un genere musicale.";
+            return;
+        }
+
+        const scala = tonalita[tonalitaScelta];
+        let progressione = [];
+
+        // Algoritmo per generare progressioni armoniche diverse in base alla tonalità
+        const giriComuni = [
+            [1, 5, 6, 4], // I-V-vi-IV (pop)
+            [2, 5, 1, 6], // ii-V-I-vi (jazz)
+            [6, 4, 1, 5], // vi-IV-I-V (pop/rock)
+            [1, 6, 2, 5]  // I-vi-ii-V (jazz)
+        ];
+
+        let giroScelto = giriComuni[Math.floor(Math.random() * giriComuni.length)];
+
+        // Convertiamo i gradi nella sequenza di accordi
+        progressione = giroScelto.map(grado => scala[grado - 1]);
+
+        // Mostriamo il risultato
+        risultatoDiv.innerHTML = `Genere: ${genereScelto} <br> Tonalità: ${tonalitaScelta} <br> Progressione: ${progressione.join(" - ")}`;
     }
 
-    // Seleziona casualmente una progressione dalla tonalità scelta
-    const progressioneCasuale = progressioni[tonalita][Math.floor(Math.random() * progressioni[tonalita].length)];
-
-    // Aggiungi variazioni in base al genere musicale
-    let progressioneModificata = [...progressioneCasuale];
-    if (genere === "jazz") {
-        progressioneModificata = progressioneCasuale.map(acc => acc + "7"); // Accordi con settime
-    } else if (genere === "rock") {
-        progressioneModificata = progressioneCasuale.map(acc => acc.replace("m", "5")); // Power chords
-    }
-
-    // Mostra la progressione generata
-    document.getElementById("accordi").innerText = progressioneModificata.join(" - ");
-}
+    // Assegniamo la funzione al bottone
+    generaButton.addEventListener("click", generaProgressione);
+});
