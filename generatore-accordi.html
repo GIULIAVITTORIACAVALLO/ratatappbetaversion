@@ -7,26 +7,38 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <h1>Generatore di Progressioni di Accordi</h1>
-    <label for="tonalita">Scegli la tonalità:</label>
-    <select id="tonalita">
-        <option value="C">Do Maggiore</option>
-        <option value="Cm">Do Minore</option>
-        <option value="D">Re Maggiore</option>
-        <option value="Dm">Re Minore</option>
-        <option value="E">Mi Maggiore</option>
-        <option value="Em">Mi Minore</option>
-        <option value="F">Fa Maggiore</option>
-        <option value="Fm">Fa Minore</option>
-        <option value="G">Sol Maggiore</option>
-        <option value="Gm">Sol Minore</option>
-        <option value="A">La Maggiore</option>
-        <option value="Am">La Minore</option>
-        <option value="B">Si Maggiore</option>
-        <option value="Bm">Si Minore</option>
-    </select>
-    <button onclick="generaAccordi()">Genera Progressione</button>
-    <p id="outputAccordi"></p>
+    <header>
+        <h1>Generatore di Progressioni di Accordi</h1>
+    </header>
+
+    <main>
+        <label for="genere">Scegli un genere musicale:</label>
+        <select id="genere">
+            <option value="cantautorato">Cantautorato Italiano</option>
+            <option value="rock">Rock</option>
+            <option value="jazz">Jazz</option>
+            <option value="pop">Pop</option>
+        </select>
+
+        <label for="tonalita">Scegli una tonalità:</label>
+        <select id="tonalita">
+            <option value="C">Do Maggiore</option>
+            <option value="A">La Minore</option>
+            <option value="G">Sol Maggiore</option>
+            <option value="E">Mi Minore</option>
+            <option value="D">Re Maggiore</option>
+            <option value="B">Si Minore</option>
+            <option value="F">Fa Maggiore</option>
+            <option value="D#">Re# Minore</option>
+        </select>
+
+        <button onclick="generaProgressione()">Genera Progressione</button>
+
+        <div id="output">
+            <h2>Progressione generata:</h2>
+            <p id="accordi"></p>
+        </div>
+    </main>
 
     <script src="js/generatore-accordi.js"></script>
 </body>
