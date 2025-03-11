@@ -1,4 +1,4 @@
-document.getElementById("genera").addEventListener("click", function () {
+document.getElementById("generaAccordi").addEventListener("click", function () {
     const tonalita = document.getElementById("tonalita").value;
     const genere = document.getElementById("genere").value;
     const risultato = document.getElementById("risultato");
