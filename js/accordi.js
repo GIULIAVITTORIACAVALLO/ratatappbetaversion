@@ -1,7 +1,7 @@
 document.getElementById("generaAccordi").addEventListener("click", function () {
     const tonalita = document.getElementById("tonalita").value;
     const genere = document.getElementById("genere").value;
-    const risultato = document.getElementById("risultato");
+    const risultato = document.getElementById("risultatoAccordi");
 
     const progressioni = {
         "maggiore": [
