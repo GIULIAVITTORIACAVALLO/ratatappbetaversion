@@ -1,16 +1,3 @@
-const dizionarioRime = {
-    "amore": ["cuore", "fiore", "dolore", "onore"],
-    "sole": ["mole", "scuole", "viole"],
-    "mare": ["fare", "care", "volare"],
-    "cane": ["pane", "urbane", "arcane"],
-    "vita": ["gita", "finita", "infinita"]
-};
-
-function trovaRime() {
-    const parola = document.getElementById("parola").value.toLowerCase();
-    const rime = dizionarioRime[parola] || ["Nessuna rima trovata"];
-    document.getElementById("outputRime").innerText = "Rime trovate: " + rime.join(", ");
-}
 async function trovaRime() {
     const parola = document.getElementById("parola").value.toLowerCase();
     const output = document.getElementById("outputRime");
@@ -33,6 +20,10 @@ async function trovaRime() {
         // Estrai solo le parole dalle rime trovate
         const rimeTrovate = data.map(entry => entry.word);
 
+        // Salva nel Local Storage
+        localStorage.setItem("ultimaParola", parola);
+        localStorage.setItem("ultimeRime", JSON.stringify(rimeTrovate));
+
         output.innerText = "Rime trovate: " + rimeTrovate.join(", ");
     } catch (error) {
         console.error("Errore nella richiesta API:", error);
@@ -40,5 +31,13 @@ async function trovaRime() {
     }
 }
 
-// Assegna la funzione al pulsante
-document.getElementById("trovaRime").addEventListener("click", trovaRime);
+// Recupera i dati salvati nel Local Storage all'apertura della pagina
+window.onload = function () {
+    const ultimaParola = localStorage.getItem("ultimaParola");
+    const ultimeRime = localStorage.getItem("ultimeRime");
+
+    if (ultimaParola && ultimeRime) {
+        document.getElementById("parola").value = ultimaParola;
+        document.getElementById("outputRime").innerText = "Rime trovate: " + JSON.parse(ultimeRime).join(", ");
+    }
+};
