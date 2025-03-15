@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #fbe8d3;
+    color: #5a3e2b;
+    padding: 20px;
+}
+
+button {
+    background-color: #d88569;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 10px;
+    border-radius: 8px;
+}
+
+button:hover {
+    background-color: #b46950;
+}
+
+#parolaCasuale, #timer {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 20px;
+}
+
+iframe {
+    display: none;
+}
