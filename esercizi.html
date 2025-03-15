@@ -4,109 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Esercizi Creativi - RATATAPP</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #fbe8d3;
-            color: #5a3e2b;
-            padding: 20px;
-        }
-        button {
-            background-color: #d88569;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 18px;
-            cursor: pointer;
-            margin: 10px;
-            border-radius: 8px;
-        }
-        button:hover {
-            background-color: #b46950;
-        }
-        #parolaCasuale, #timer {
-            font-size: 24px;
-            font-weight: bold;
-            margin: 20px;
-        }
-        iframe {
-            display: none;
-            width: 0;
-            height: 0;
-        }
-    </style>
+    <link rel="stylesheet" href="esercizi.css">
 </head>
 <body>
 
     <h1>Esercizi Creativi</h1>
     
     <p id="parolaCasuale">Premi il pulsante per generare una parola.</p>
-    <button onclick="generaParola()">Genera Parola</button>
+    <button id="generaParolaBtn">Genera Parola</button>
 
     <p id="timer">3:00</p>
-    <button onclick="avviaCronometro()">Avvia Cronometro</button>
+    <button id="avviaCronometroBtn">Avvia Cronometro</button>
 
     <!-- Player YouTube nascosto -->
-    <iframe id="youtubeFrame" src="" frameborder="0" allow="autoplay"></iframe>
+    <iframe id="youtubeFrame" width="0" height="0" frameborder="0" allow="autoplay"></iframe>
 
-    <script>
-        function generaParola() {
-            const parole = ["Mare", "Sogno", "Vento", "Libertà", "Amore", "Notte", "Viaggio", "Silenzio"];
-            const parolaCasuale = parole[Math.floor(Math.random() * parole.length)];
-        
-            document.getElementById("parolaCasuale").textContent = "Parola: " + parolaCasuale;
-            localStorage.setItem("parolaCasuale", parolaCasuale);
-        }
-
-        function avviaCronometro() {
-            let tempo = 180; // 3 minuti in secondi
-            const timerEl = document.getElementById("timer");
-
-            // Se esiste un tempo salvato, recuperalo
-            if (localStorage.getItem("tempoRimanente")) {
-                tempo = parseInt(localStorage.getItem("tempoRimanente"));
-            }
-
-            // Mostra l'iframe YouTube e avvia la musica
-            const videoFrame = document.getElementById("youtubeFrame");
-            videoFrame.src = "https://www.youtube.com/embed/CfPxlb8-ZQ0?autoplay=1&loop=1&playlist=CfPxlb8-ZQ0";
-            videoFrame.style.display = "block";
-
-            const countdown = setInterval(() => {
-                if (tempo < 0) {
-                    clearInterval(countdown);
-                    timerEl.textContent = "Tempo Scaduto!";
-                    localStorage.removeItem("tempoRimanente");
-
-                    // Ferma la musica nascondendo l'iframe
-                    videoFrame.src = "";
-                    videoFrame.style.display = "none";
-                    return;
-                }
-
-                let min = Math.floor(tempo / 60);
-                let sec = tempo % 60;
-                timerEl.textContent = `${min}:${sec < 10 ? "0" : ""}${sec}`;
-                localStorage.setItem("tempoRimanente", tempo); // Salva il tempo attuale
-                tempo--;
-
-            }, 1000);
-        }
-
-        // Recupera i dati salvati all'avvio della pagina
-        document.addEventListener("DOMContentLoaded", function () {
-            const parolaSalvata = localStorage.getItem("parolaCasuale");
-            if (parolaSalvata) {
-                document.getElementById("parolaCasuale").textContent = "Parola: " + parolaSalvata;
-            }
-
-            const tempoSalvato = localStorage.getItem("tempoRimanente");
-            if (tempoSalvato && tempoSalvato > 0) {
-                avviaCronometro(); // Se c'è un timer attivo, lo riprende
-            }
-        });
-    </script>
+    <script src="esercizi.js"></script>
 
 </body>
 </html>
