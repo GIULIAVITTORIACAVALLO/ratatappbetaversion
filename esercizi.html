@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esercizi Creativi - RATATAPP</title>
+    <title>Esercizi Creativi</title>
     <link rel="stylesheet" href="esercizi.css">
 </head>
 <body>
 
     <h1>Esercizi Creativi</h1>
-    
-    <p id="parolaCasuale">Premi il pulsante per generare una parola.</p>
-    <button id="generaParolaBtn">Genera Parola</button>
+    <button onclick="generaParola()">Genera Parola Casuale</button>
+    <p id="parolaCasuale">Parola: ...</p>
 
+    <button onclick="avviaCronometro()">Avvia Cronometro</button>
     <p id="timer">3:00</p>
-    <button id="avviaCronometroBtn">Avvia Cronometro</button>
 
-    <!-- Player YouTube nascosto -->
-    <iframe id="youtubeFrame" width="0" height="0" frameborder="0" allow="autoplay"></iframe>
+    <!-- Lettore YouTube nascosto -->
+    <div id="playerContainer">
+        <iframe id="ytPlayer" width="0" height="0"
+            src="https://www.youtube.com/embed/CfPxlb8-ZQ0?enablejsapi=1&rel=0&autoplay=0"
+            frameborder="0" allow="autoplay"></iframe>
+    </div>
 
     <script src="esercizi.js"></script>
-
 </body>
 </html>
