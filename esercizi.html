@@ -4,22 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Esercizi Creativi</title>
-    <link rel="stylesheet" href="esercizi.css">
 </head>
 <body>
-
     <h1>Esercizi Creativi</h1>
-    <button onclick="generaParola()">Genera Parola Casuale</button>
-    <p id="parolaCasuale">Parola: ...</p>
+    
+    <button onclick="generaParola()">Genera Parola</button>
+    <p id="parolaCasuale">Parola: </p>
 
     <button onclick="avviaCronometro()">Avvia Cronometro</button>
     <p id="timer">3:00</p>
 
     <!-- Lettore YouTube nascosto -->
-    <div id="playerContainer">
-        <iframe id="ytPlayer" width="0" height="0"
-            src="https://www.youtube.com/embed/CfPxlb8-ZQ0?enablejsapi=1&rel=0&autoplay=0"
-            frameborder="0" allow="autoplay"></iframe>
+    <div id="musica" style="display: none;">
+        <iframe id="player" width="0" height="0" src="" frameborder="0" allow="autoplay"></iframe>
     </div>
 
     <script src="esercizi.js"></script>
