@@ -1,5 +1,5 @@
 function generaParola() {
-    const parole = ["Mare", "Sogno", "Vento", "Libertà", "Musica", "Viaggio", "Orizzonte"];
+    const parole = ["Mare", "Sogno", "Vento", "Libertà", "Notte", "Aurora"];
     const parolaCasuale = parole[Math.floor(Math.random() * parole.length)];
     document.getElementById("parolaCasuale").textContent = "Parola: " + parolaCasuale;
 }
@@ -19,31 +19,16 @@ function avviaCronometro() {
             timerEl.textContent = "Tempo Scaduto!";
         }
     }, 1000);
-
-    // Avvia la musica quando il cronometro parte
-    avviaMusica();
 }
 
-// Controlli per il player di YouTube
-let player;
-function onYouTubeIframeAPIReady() {
-    player = new YT.Player('ytPlayer');
-}
+// Funzione per play/pausa del video YouTube
+function toggleMusic() {
+    const player = document.getElementById("youtubePlayer");
+    const src = player.src;
 
-function avviaMusica() {
-    if (player) player.playVideo();
-}
-
-function toggleMusica() {
-    if (player && player.getPlayerState() === 1) { // 1 = in riproduzione
-        player.pauseVideo();
+    if (src.includes("autoplay=1")) {
+        player.src = src.replace("autoplay=1", "autoplay=0");
     } else {
-        player.playVideo();
+        player.src = src + "&autoplay=1";
     }
 }
-
-// Carica l'API di YouTube
-const tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-const firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
