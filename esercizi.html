@@ -3,32 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esercizi Creativi</title>
+    <title>Esercizi Creativi - RATATAPP</title>
     <link rel="stylesheet" href="stili.css">
 </head>
-<body>
-    <h1>Esercizi Creativi</h1>
-    
-    <!-- Generazione parola casuale -->
-    <button onclick="generaParola()">Genera Parola</button>
-    <p id="parolaCasuale">Parola: </p>
+<body class="esercizi-bg">
 
-    <!-- Cronometro -->
-    <button onclick="avviaCronometro()">Avvia Cronometro</button>
-    <p id="timer">3:00</p>
+    <div class="container">
+        <h1>Esercizi Creativi</h1>
 
-    <!-- Area per scrivere il testo -->
-    <textarea id="testoCreativo" placeholder="Scrivi il tuo testo qui..."></textarea>
+        <button onclick="generaParola()">Genera Parola</button>
+        <p id="parolaCasuale">Parola: </p>
 
-    <!-- Controlli musica con YouTube -->
-    <button onclick="toggleMusica()">Play/Pausa Musica</button>
-    <div id="playerContainer">
-        <iframe id="ytPlayer" width="560" height="315" 
-            src="https://www.youtube.com/embed/CfPxlb8-ZQ0?enablejsapi=1" 
-            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-        </iframe>
+        <button onclick="avviaCronometro()">Avvia Cronometro</button>
+        <p id="timer">3:00</p>
+
+        <textarea id="testoCreativo" placeholder="Scrivi il tuo testo qui..."></textarea>
+
+        <div class="music-container">
+            <iframe id="youtubePlayer" width="560" height="315" 
+                src="https://www.youtube.com/embed/CfPxlb8-ZQ0?enablejsapi=1" 
+                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+            </iframe>
+            <button onclick="toggleMusic()">Play/Pausa Musica</button>
+        </div>
     </div>
 
     <script src="esercizi.js"></script>
+
 </body>
 </html>
