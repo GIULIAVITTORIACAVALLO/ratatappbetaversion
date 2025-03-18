@@ -3,32 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esercizi Creativi - RATATAPP</title>
-    <link rel="stylesheet" href="stili.css">
+    <title>Esercizi Creativi</title>
+    <link rel="stylesheet" href="esercizi.css">
 </head>
-<body class="esercizi-bg">
-
+<body>
     <div class="container">
         <h1>Esercizi Creativi</h1>
 
         <button onclick="generaParola()">Genera Parola</button>
-        <p id="parolaCasuale">Parola: </p>
+        <p id="parolaCasuale">Parola: -</p>
 
         <button onclick="avviaCronometro()">Avvia Cronometro</button>
         <p id="timer">3:00</p>
 
-        <textarea id="testoCreativo" placeholder="Scrivi il tuo testo qui..."></textarea>
+        <textarea id="testoCreativo" placeholder="Scrivi qui il tuo testo..."></textarea>
 
-        <div class="music-container">
-            <iframe id="youtubePlayer" width="560" height="315" 
-                src="https://www.youtube.com/embed/CfPxlb8-ZQ0?enablejsapi=1" 
-                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-            </iframe>
-            <button onclick="toggleMusic()">Play/Pausa Musica</button>
-        </div>
+        <button onclick="controllaMusica()">🎵 Play/Pausa Musica</button>
+        <iframe id="musicaLoFi" width="560" height="315" 
+            src="https://www.youtube.com/embed/CfPxlb8-ZQ0?autoplay=1&loop=1&playlist=CfPxlb8-ZQ0" 
+            title="Lo-Fi Music" frameborder="0" allowfullscreen>
+        </iframe>
     </div>
 
-<script src="js/esercizi.js"></script>
-
+    <script src="esercizi.js"></script>
 </body>
 </html>
