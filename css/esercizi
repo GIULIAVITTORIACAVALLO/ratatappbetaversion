@@ -1,29 +1,66 @@
-body {
-    font-family: Arial, sans-serif;
+/* Font */
+@import url('https://fonts.googleapis.com/css2?family=Railey&display=swap');
+
+body.esercizi-bg {
+    background: linear-gradient(to bottom, #ffcc99, #ff9966);
+    font-family: 'Railey', sans-serif;
     text-align: center;
-    background-color: #fdf6e3;
-    color: #333;
+    color: #4a2c2a;
 }
 
+.container {
+    width: 80%;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background: #fff8e1;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Bottoni */
 button {
+    background: #ff7043;
+    color: white;
+    border: none;
     padding: 10px 20px;
     margin: 10px;
-    background-color: #ff7f50;
-    border: none;
-    color: white;
-    font-size: 16px;
+    font-size: 18px;
     cursor: pointer;
+    border-radius: 10px;
+    transition: 0.3s;
 }
 
 button:hover {
-    background-color: #e76f42;
+    background: #e64a19;
 }
 
+/* Timer */
 #timer {
     font-size: 24px;
     font-weight: bold;
+    color: #d32f2f;
 }
 
-#playerContainer {
-    display: none; /* Nasconde l'iframe di YouTube */
+/* Casella di testo */
+#testoCreativo {
+    width: 90%;
+    height: 300px;
+    font-size: 18px;
+    padding: 10px;
+    border: 2px solid #ff7043;
+    border-radius: 10px;
+    background: #fff;
+    resize: none;
+    outline: none;
+    margin-top: 15px;
+}
+
+/* Stile per il video e pulsante musica */
+.music-container {
+    margin-top: 20px;
+}
+
+iframe {
+    border-radius: 10px;
 }
