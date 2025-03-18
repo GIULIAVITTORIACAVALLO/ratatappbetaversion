@@ -1,5 +1,5 @@
 function generaParola() {
-    const parole = ["Mare", "Sogno", "Vento", "Libertà", "Notte", "Aurora"];
+    const parole = ["Mare", "Sogno", "Vento", "Libertà", "Notte", "Viaggio", "Orizzonte"];
     const parolaCasuale = parole[Math.floor(Math.random() * parole.length)];
     document.getElementById("parolaCasuale").textContent = "Parola: " + parolaCasuale;
 }
@@ -21,14 +21,13 @@ function avviaCronometro() {
     }, 1000);
 }
 
-// Funzione per play/pausa del video YouTube
-function toggleMusic() {
-    const player = document.getElementById("youtubePlayer");
-    const src = player.src;
+function controllaMusica() {
+    let iframe = document.getElementById("musicaLoFi");
+    let src = iframe.src;
 
     if (src.includes("autoplay=1")) {
-        player.src = src.replace("autoplay=1", "autoplay=0");
+        iframe.src = src.replace("autoplay=1", "autoplay=0");
     } else {
-        player.src = src + "&autoplay=1";
+        iframe.src = src.replace("autoplay=0", "autoplay=1");
     }
 }
