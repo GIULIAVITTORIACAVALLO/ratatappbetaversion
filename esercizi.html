@@ -7,24 +7,25 @@
     <link rel="stylesheet" href="esercizi.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Esercizi Creativi</h1>
 
-        <button onclick="generaParola()">Genera Parola</button>
-        <p id="parolaCasuale">Parola: -</p>
+    <h1>Esercizi Creativi</h1>
 
-        <button onclick="avviaCronometro()">Avvia Cronometro</button>
-        <p id="timer">3:00</p>
+    <button onclick="generaParola()">📝 Genera Parola</button>
+    <p id="parolaCasuale">Parola: --</p>
 
-        <textarea id="testoCreativo" placeholder="Scrivi qui il tuo testo..."></textarea>
+    <button onclick="avviaCronometro()">⏳ Avvia Timer</button>
+    <button onclick="pausaCronometro()">⏸️ Pausa Timer</button>
+    <p id="timer">3:00</p>
 
-        <button onclick="controllaMusica()">🎵 Play/Pausa Musica</button>
-        <iframe id="musicaLoFi" width="560" height="315" 
-            src="https://www.youtube.com/embed/CfPxlb8-ZQ0?autoplay=1&loop=1&playlist=CfPxlb8-ZQ0" 
-            title="Lo-Fi Music" frameborder="0" allowfullscreen>
-        </iframe>
-    </div>
+    <textarea id="testoUtente" placeholder="Scrivi il tuo esercizio qui..."></textarea>
+
+    <audio id="audioLofi" loop>
+        <source src="audio/LOFI.mp3" type="audio/mpeg">
+        Il tuo browser non supporta l'audio HTML5.
+    </audio>
+    <button onclick="toggleMusica()">🎵 Play/Pausa Musica</button>
 
     <script src="js/esercizi.js"></script>
+
 </body>
 </html>
