@@ -1,41 +1,41 @@
 body {
-    font-family: "Railey", sans-serif;
-    background: linear-gradient(to right, #ffcc99, #ff9999);
-    color: #5a3e36;
+    font-family: Arial, sans-serif;
+    background-color: #FAE3D9;
+    color: #333;
     text-align: center;
+    padding: 20px;
 }
 
-.container {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 15px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+h1 {
+    color: #FF8C94;
 }
 
 button {
-    background: #ff704d;
+    background-color: #FF847C;
     color: white;
-    padding: 10px 15px;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    padding: 10px 15px;
     margin: 10px;
+    cursor: pointer;
     font-size: 16px;
+    border-radius: 5px;
 }
 
 button:hover {
-    background: #cc5a3b;
+    background-color: #E84A5F;
+}
+
+#parolaCasuale, #timer {
+    font-size: 20px;
+    margin: 10px 0;
 }
 
 textarea {
-    width: 90%;
-    height: 150px;
+    width: 80%;
+    height: 200px;
     padding: 10px;
     font-size: 16px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    margin-top: 10px;
-    resize: none;
+    border: 2px solid #FF847C;
+    border-radius: 5px;
+    margin-top: 20px;
 }
