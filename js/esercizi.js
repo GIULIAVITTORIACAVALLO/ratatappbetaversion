@@ -1,14 +1,17 @@
 function generaParola() {
-    const parole = ["Mare", "Sogno", "Vento", "Libertà", "Notte", "Viaggio", "Orizzonte"];
+    const parole = ["Mare", "Sogno", "Vento", "Libertà", "Silenzio", "Melodia", "Tempo"];
     const parolaCasuale = parole[Math.floor(Math.random() * parole.length)];
     document.getElementById("parolaCasuale").textContent = "Parola: " + parolaCasuale;
 }
 
+let tempo = 180;
+let countdown;
+
 function avviaCronometro() {
-    let tempo = 180;
     const timerEl = document.getElementById("timer");
 
-    const countdown = setInterval(() => {
+    clearInterval(countdown); // Reset del timer precedente, se attivo
+    countdown = setInterval(() => {
         let min = Math.floor(tempo / 60);
         let sec = tempo % 60;
         timerEl.textContent = `${min}:${sec < 10 ? "0" : ""}${sec}`;
@@ -21,13 +24,15 @@ function avviaCronometro() {
     }, 1000);
 }
 
-function controllaMusica() {
-    let iframe = document.getElementById("musicaLoFi");
-    let src = iframe.src;
+function pausaCronometro() {
+    clearInterval(countdown);
+}
 
-    if (src.includes("autoplay=1")) {
-        iframe.src = src.replace("autoplay=1", "autoplay=0");
+function toggleMusica() {
+    const audio = document.getElementById("audioLofi");
+    if (audio.paused) {
+        audio.play();
     } else {
-        iframe.src = src.replace("autoplay=0", "autoplay=1");
+        audio.pause();
     }
 }
