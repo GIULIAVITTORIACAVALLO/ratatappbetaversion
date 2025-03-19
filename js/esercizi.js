@@ -29,10 +29,14 @@ function pausaCronometro() {
 }
 
 function toggleMusica() {
-    const audio = document.getElementById("audioLofi");
-    if (audio.paused) {
-        audio.play();
-    } else {
+    const audio = new Audio("audio/LOFI.mp3");
+let isPlaying = false;
+
+function toggleMusica() {
+    if (isPlaying) {
         audio.pause();
+    } else {
+        audio.play();
     }
+    isPlaying = !isPlaying;
 }
