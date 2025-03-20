@@ -32,11 +32,12 @@ function pausaCronometro() {
     inEsecuzione = false;
 }
 
+const audio = document.getElementById("musica");
+
 function toggleMusica() {
-    const musica = document.getElementById("musica");
-    if (musica.paused) {
-        musica.play();
+    if (audio.paused) {
+        audio.play();
     } else {
-        musica.pause();
+        audio.pause();
     }
 }
