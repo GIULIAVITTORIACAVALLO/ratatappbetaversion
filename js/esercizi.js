@@ -32,12 +32,21 @@ function pausaCronometro() {
     inEsecuzione = false;
 }
 
-const audio = document.getElementById("musica");
-
 function toggleMusica() {
-    if (audio.paused) {
-        audio.play();
+    let audio = document.getElementById("musica");
+    
+    if (!audio) {
+        console.error("Elemento audio non trovato!");
+        return;
+    }
+
+    if (audio.readyState >= 2) { // Controlla se il file è pronto per essere riprodotto
+        if (audio.paused) {
+            audio.play().catch(error => console.error("Errore nella riproduzione dell'audio:", error));
+        } else {
+            audio.pause();
+        }
     } else {
-        audio.pause();
+        console.error("Audio non pronto. Attendere il caricamento.");
     }
 }
