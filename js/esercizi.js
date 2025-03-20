@@ -34,19 +34,27 @@ function pausaCronometro() {
 
 function toggleMusica() {
     let audio = document.getElementById("musica");
-    
+
     if (!audio) {
         console.error("Elemento audio non trovato!");
         return;
     }
 
-    if (audio.readyState >= 2) { // Controlla se il file è pronto per essere riprodotto
+    // Se l'audio non è ancora caricato, forziamo il caricamento
+    if (audio.readyState < 2) { 
+        audio.load(); // Forza il caricamento
+        console.log("Caricamento audio in corso...");
+    }
+
+    // Dopo il caricamento, riproduci o metti in pausa
+    audio.oncanplaythrough = () => {
         if (audio.paused) {
-            audio.play().catch(error => console.error("Errore nella riproduzione dell'audio:", error));
+            audio.play()
+                .then(() => console.log("Audio in riproduzione"))
+                .catch(error => console.error("Errore nella riproduzione:", error));
         } else {
             audio.pause();
+            console.log("Audio in pausa");
         }
-    } else {
-        console.error("Audio non pronto. Attendere il caricamento.");
-    }
+    };
 }
