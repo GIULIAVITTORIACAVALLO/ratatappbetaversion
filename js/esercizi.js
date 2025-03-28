@@ -142,21 +142,19 @@ function toggleMusica() {
         return;
     }
 
-    // Se l'audio non è ancora caricato, forziamo il caricamento
-    if (audio.readyState < 2) { 
-        audio.load(); // Forza il caricamento
-        console.log("Caricamento audio in corso...");
+    // Controlla se l'audio è caricato
+    if (audio.readyState === 0) { 
+        console.warn("Audio non ancora caricato. Provo a ricaricarlo...");
+        audio.load();
     }
 
-    // Dopo il caricamento, riproduci o metti in pausa
-    audio.oncanplaythrough = () => {
-        if (audio.paused) {
-            audio.play()
-                .then(() => console.log("Audio in riproduzione"))
-                .catch(error => console.error("Errore nella riproduzione:", error));
-        } else {
-            audio.pause();
-            console.log("Audio in pausa");
-        }
-    };
+    // Prova a far partire l'audio
+    if (audio.paused) {
+        audio.play()
+            .then(() => console.log("Audio in riproduzione"))
+            .catch(error => console.error("Errore nella riproduzione:", error));
+    } else {
+        audio.pause();
+        console.log("Audio in pausa");
+    }
 }
