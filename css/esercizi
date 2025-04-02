@@ -1,41 +1,37 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #FAE3D9;
-    color: #333;
+    font-family: 'Arial', sans-serif;
+    background-color: #F4E8D5;
+    color: #5A3E2B;
     text-align: center;
     padding: 20px;
 }
 
 h1 {
-    color: #FF8C94;
+    font-family: 'Railey', cursive;
+    color: #D67A52;
 }
 
 button {
-    background-color: #FF847C;
+    background-color: #D67A52;
     color: white;
     border: none;
-    padding: 10px 15px;
+    padding: 10px 20px;
     margin: 10px;
-    cursor: pointer;
     font-size: 16px;
-    border-radius: 5px;
+    cursor: pointer;
+    border-radius: 10px;
 }
 
 button:hover {
-    background-color: #E84A5F;
-}
-
-#parolaCasuale, #timer {
-    font-size: 20px;
-    margin: 10px 0;
+    background-color: #B85C42;
 }
 
 textarea {
     width: 80%;
-    height: 200px;
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid #FF847C;
-    border-radius: 5px;
+    height: 150px;
     margin-top: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #B85C42;
+    font-size: 16px;
 }
