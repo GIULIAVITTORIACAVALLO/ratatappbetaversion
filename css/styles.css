@@ -1,7 +1,3 @@
-/* Importa il font calligrafico da Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
-
-/* Stile generale del corpo della pagina */
 body {
     font-family: 'Dancing Script', cursive;
     background-color: #fdf6f0; /* Beige chiaro */
