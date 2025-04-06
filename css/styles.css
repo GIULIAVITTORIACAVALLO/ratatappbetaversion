@@ -1,36 +1,34 @@
 body {
     font-family: 'Dancing Script', cursive;
-    background-color: #fdf6f0; /* Beige chiaro */
-    color: #5c3a21; /* Marrone scuro */
+    background-color: #fdf6f0;
+    color: #5c3a21;
     text-align: center;
     padding: 2rem;
-    margin: 0;
 }
 
-/* Stile dei titoli */
-h1, h2, h3 {
-    color: #a65f4a; /* Rosa antico */
+h1 {
+    color: #a65f4a;
+    font-size: 3em;
+    margin-bottom: 1.5rem;
 }
 
-/* Stile dei pulsanti */
 button {
     font-size: 1.1em;
     padding: 0.6em 1.2em;
     margin: 0.5em;
     border: none;
     border-radius: 25px;
-    background-color: #f4c9b7; /* Rosa chiaro */
-    color: #5c3a21; /* Marrone scuro */
+    background-color: #f4c9b7;
+    color: #5c3a21;
     box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 button:hover {
-    background-color: #f1bca7; /* Rosa antico più scuro */
+    background-color: #f1bca7;
 }
 
-/* Stile delle aree di testo */
 textarea {
     width: 90%;
     max-width: 700px;
@@ -38,25 +36,23 @@ textarea {
     margin-top: 1em;
     padding: 1em;
     border-radius: 15px;
-    border: 1px solid #d3a17e; /* Marrone chiaro */
+    border: 1px solid #d3a17e;
     font-size: 1em;
     font-family: 'Dancing Script', cursive;
-    background-color: #fffaf6; /* Beige molto chiaro */
-    color: #5c3a21; /* Marrone scuro */
+    background-color: #fffaf6;
+    color: #5c3a21;
     box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
 }
 
-/* Stile del pulsante Home */
 .home-button {
     position: absolute;
     top: 20px;
     left: 20px;
-    background-color: #e6b7a9; /* Rosa antico */
+    background-color: #e6b7a9;
     font-size: 1em;
     padding: 0.5em 1em;
 }
 
-/* Stile per il timer e la parola casuale */
 #timer, #parolaCasuale {
     font-size: 1.5em;
     margin: 1em 0;
