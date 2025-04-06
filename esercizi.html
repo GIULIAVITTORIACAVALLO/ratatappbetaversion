@@ -5,29 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Esercizi Creativi</title>
     <link rel="stylesheet" href="esercizi.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
 </head>
 <body>
-<button onclick="window.location.href='https://giuliavittoriacava.wixsite.com/ratatappbetaversion'" class="home-button">🏠 HOME</button>
-    <h1>Esercizi Creativi</h1>
+    <header>
+        <button class="home-button" onclick="window.location.href='https://giuliavittoriacava.wixsite.com/ratatappbetaversion'">Home</button>
+    </header>
 
-    <button onclick="generaParola()">📝 Genera Parola</button>
-    <p id="parolaCasuale">Parola: --</p>
+    <main>
+        <h1>Esercizi Creativi</h1>
 
-    <button onclick="avviaCronometro()">⏳ Avvia Timer</button>
-    <button onclick="pausaCronometro()">⏸️ Pausa Timer</button>
-    <p id="timer">3:00</p>
+        <button onclick="generaParola()">📝 Genera Parola</button>
+        <p id="parolaCasuale">Parola: --</p>
 
-    <textarea id="testoUtente" placeholder="Scrivi il tuo esercizio qui..."></textarea>
+        <button onclick="avviaCronometro()">⏳ Avvia Timer</button>
+        <button onclick="pausaCronometro()">⏸️ Pausa Timer</button>
+        <p id="timer">3:00</p>
 
-    <!-- Musica -->
-    <audio id="musica" preload="auto">
-        <source src="https://giuliavittoriacavallo.github.io/ratatappbetaversion/audio/lofi.mp3" type="audio/mpeg">
-        Il tuo browser non supporta l'elemento audio.
-    </audio>
-    <button onclick="toggleMusica()">🎵 Play/Pausa Musica</button>
+        <textarea id="testoUtente" placeholder="Scrivi il tuo esercizio qui..."></textarea>
 
-    <!-- Collegamento allo script JavaScript -->
+        <audio id="musica" preload="auto">
+            <source src="https://giuliavittoriacavallo.github.io/ratatappbetaversion/audio/lofi.mp3" type="audio/mpeg">
+            Il tuo browser non supporta l'elemento audio.
+        </audio>
+        <button onclick="toggleMusica()">🎵 Play/Pausa Musica</button>
+    </main>
+
     <script src="js/esercizi.js"></script>
-
 </body>
 </html>
