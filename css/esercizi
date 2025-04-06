@@ -1,37 +1,59 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #F4E8D5;
-    color: #5A3E2B;
+    font-family: 'Dancing Script', cursive;
+    background-color: #fdf6f0;
+    color: #5c3a21;
     text-align: center;
-    padding: 20px;
+    padding: 2rem;
 }
 
 h1 {
-    font-family: 'Railey', cursive;
-    color: #D67A52;
+    color: #a65f4a;
+    font-size: 3em;
+    margin-bottom: 1.5rem;
 }
 
 button {
-    background-color: #D67A52;
-    color: white;
+    font-size: 1.1em;
+    padding: 0.6em 1.2em;
+    margin: 0.5em;
     border: none;
-    padding: 10px 20px;
-    margin: 10px;
-    font-size: 16px;
+    border-radius: 25px;
+    background-color: #f4c9b7;
+    color: #5c3a21;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
     cursor: pointer;
-    border-radius: 10px;
+    transition: all 0.3s ease;
 }
 
 button:hover {
-    background-color: #B85C42;
+    background-color: #f1bca7;
 }
 
 textarea {
-    width: 80%;
-    height: 150px;
-    margin-top: 20px;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #B85C42;
-    font-size: 16px;
+    width: 90%;
+    max-width: 700px;
+    height: 200px;
+    margin-top: 1em;
+    padding: 1em;
+    border-radius: 15px;
+    border: 1px solid #d3a17e;
+    font-size: 1em;
+    font-family: 'Dancing Script', cursive;
+    background-color: #fffaf6;
+    color: #5c3a21;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+}
+
+.home-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #e6b7a9;
+    font-size: 1em;
+    padding: 0.5em 1em;
+}
+
+#timer, #parolaCasuale {
+    font-size: 1.5em;
+    margin: 1em 0;
 }
