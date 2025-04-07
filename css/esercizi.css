@@ -83,3 +83,23 @@ textarea {
     background-color: #f1b6a4;
     transform: scale(1.05);
 }
+ul#rime-perfette,
+ul#rime-assonanti {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+ul#rime-perfette li,
+ul#rime-assonanti li {
+    background-color: #fceae8;
+    padding: 8px 12px;
+    border-radius: 15px;
+    font-size: 1.2rem;
+    font-family: 'Dancing Script', cursive;
+    color: #5a3e36;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+}
