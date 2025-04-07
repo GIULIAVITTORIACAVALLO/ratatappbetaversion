@@ -1,34 +1,33 @@
-function trovaRime() {
-    const parolaInput = document.getElementById("parolaInput").value.trim().toLowerCase();
-    if (!parolaInput) return;
+function cercaRime() {
+    const parola = document.getElementById("parola").value.toLowerCase();
 
-    fetch(`https://rime.retrica.dev/api/rime/${parolaInput}`)
-        .then(response => response.json())
-        .then(data => {
-            const perfette = data.rime || [];
-            const assonanti = data.assonanze || [];
+    // Esempio fittizio - da sostituire con un vero dizionario di rime
+    const rimePerfette = ["carro", "barro", "farro"].filter(p => p.endsWith(parola.slice(-3)));
+    const rimeAssonanti = ["muro", "duro", "oscuro"].filter(p => p.includes(parola.slice(-2)));
 
-            mostraRime(perfette, "rimePerfette", "Rime Perfette");
-            mostraRime(assonanti, "rimeAssonanti", "Rime Assonanti/Consonanti");
-        })
-        .catch(error => console.error("Errore nella richiesta delle rime:", error));
-}
+    const listaPerfette = document.getElementById("rimePerfette");
+    const listaAssonanti = document.getElementById("rimeAssonanti");
 
-function mostraRime(lista, elementoId, titolo) {
-    const contenitore = document.getElementById(elementoId);
-    contenitore.innerHTML = `<h3>${titolo}</h3>`;
+    listaPerfette.innerHTML = "";
+    listaAssonanti.innerHTML = "";
 
-    if (lista.length === 0) {
-        contenitore.innerHTML += "<p>Nessuna rima trovata.</p>";
-        return;
+    if (rimePerfette.length === 0) {
+        listaPerfette.innerHTML = "<li>Nessuna rima perfetta trovata</li>";
+    } else {
+        rimePerfette.forEach(rima => {
+            const li = document.createElement("li");
+            li.innerText = rima;
+            listaPerfette.appendChild(li);
+        });
     }
 
-    const ul = document.createElement("ul");
-    lista.forEach(rima => {
-        const li = document.createElement("li");
-        li.textContent = rima;
-        ul.appendChild(li);
-    });
-
-    contenitore.appendChild(ul);
+    if (rimeAssonanti.length === 0) {
+        listaAssonanti.innerHTML = "<li>Nessuna rima assonante trovata</li>";
+    } else {
+        rimeAssonanti.forEach(rima => {
+            const li = document.createElement("li");
+            li.innerText = rima;
+            listaAssonanti.appendChild(li);
+        });
+    }
 }
