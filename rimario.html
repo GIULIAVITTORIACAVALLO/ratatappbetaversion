@@ -2,24 +2,32 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rimario</title>
-    <link rel="stylesheet" href="css/esercizi.css"> 
+    <title>Rimario | RATATAPP</title>
+    <link rel="stylesheet" href="css/esercizi.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <button onclick="window.location.href='https://giuliavittoriacava.wixsite.com/ratatappbetaversion'" class="home-button">🏠 HOME</button>
-   <nav class="tool-navigation">
-    <button onclick="window.location.href='blocco.html'">📝 Blocco-notes</button>
-    <button onclick="window.location.href='esercizi.html'">💡 Esercizi Creativi</button>
-    <button onclick="window.location.href='accordi.html'">🎶 Progressioni di Accordi</button>
-</nav>
-    <h1>Trova le rime</h1>
-    <label for="parola">Inserisci una parola:</label>
-    <input type="text" id="parola">
-    <button onclick="trovaRime()">Cerca</button>
-    <button id="cancellaStorico">Cancella Storico</button>
-    <p id="outputRime"></p>
+
+    <header>
+        <h1>Rimario</h1>
+    </header>
+
+    <main>
+        <input type="text" id="parola" placeholder="Inserisci una parola">
+        <button onclick="cercaRime()">Cerca Rime</button>
+
+        <h2>Rime perfette</h2>
+        <ul id="rimePerfette"></ul>
+
+        <h2>Rime assonanti/consonanti</h2>
+        <ul id="rimeAssonanti"></ul>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 RATATAPP BETA</p>
+    </footer>
 
     <script src="js/rimario.js"></script>
 </body>
