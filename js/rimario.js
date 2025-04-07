@@ -1,43 +1,71 @@
 async function trovaRime() {
     const parola = document.getElementById("parola").value.toLowerCase();
-    const output = document.getElementById("outputRime");
+    const rimePerfette = document.getElementById("rime-perfette");
+    const rimeAssonanti = document.getElementById("rime-assonanti");
+
+    rimePerfette.innerHTML = "";
+    rimeAssonanti.innerHTML = "";
 
     if (parola.length < 2) {
-        output.innerText = "Inserisci una parola più lunga.";
+        rimePerfette.innerHTML = "<li>Inserisci una parola più lunga.</li>";
         return;
     }
 
     try {
-        // Chiamata API per ottenere rime in italiano
         const response = await fetch(`https://rhymebrain.com/talk?function=getRhymes&word=${parola}&lang=it`);
         const data = await response.json();
 
         if (data.length === 0) {
-            output.innerText = "Nessuna rima trovata.";
+            rimePerfette.innerHTML = "<li>Nessuna rima trovata.</li>";
             return;
         }
 
-        // Estrai solo le parole dalle rime trovate
-        const rimeTrovate = data.map(entry => entry.word);
+        // Dividi le rime in base allo score (più è alto, più è perfetta)
+        const perfette = data.filter(entry => entry.score >= 300).map(entry => entry.word);
+        const assonanti = data.filter(entry => entry.score < 300).map(entry => entry.word);
+
+        // Mostra in HTML
+        perfette.forEach(word => {
+            const li = document.createElement("li");
+            li.textContent = word;
+            rimePerfette.appendChild(li);
+        });
+
+        assonanti.forEach(word => {
+            const li = document.createElement("li");
+            li.textContent = word;
+            rimeAssonanti.appendChild(li);
+        });
 
         // Salva nel Local Storage
         localStorage.setItem("ultimaParola", parola);
-        localStorage.setItem("ultimeRime", JSON.stringify(rimeTrovate));
+        localStorage.setItem("rimePerfette", JSON.stringify(perfette));
+        localStorage.setItem("rimeAssonanti", JSON.stringify(assonanti));
 
-        output.innerText = "Rime trovate: " + rimeTrovate.join(", ");
     } catch (error) {
         console.error("Errore nella richiesta API:", error);
-        output.innerText = "Errore nel recupero delle rime.";
+        rimePerfette.innerHTML = "<li>Errore nel recupero delle rime.</li>";
     }
 }
 
-// Recupera i dati salvati nel Local Storage all'apertura della pagina
 window.onload = function () {
     const ultimaParola = localStorage.getItem("ultimaParola");
-    const ultimeRime = localStorage.getItem("ultimeRime");
+    const perfette = JSON.parse(localStorage.getItem("rimePerfette") || "[]");
+    const assonanti = JSON.parse(localStorage.getItem("rimeAssonanti") || "[]");
 
-    if (ultimaParola && ultimeRime) {
+    if (ultimaParola) {
         document.getElementById("parola").value = ultimaParola;
-        document.getElementById("outputRime").innerText = "Rime trovate: " + JSON.parse(ultimeRime).join(", ");
+
+        perfette.forEach(word => {
+            const li = document.createElement("li");
+            li.textContent = word;
+            document.getElementById("rime-perfette").appendChild(li);
+        });
+
+        assonanti.forEach(word => {
+            const li = document.createElement("li");
+            li.textContent = word;
+            document.getElementById("rime-assonanti").appendChild(li);
+        });
     }
 };
