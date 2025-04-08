@@ -4,29 +4,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const risultato = document.getElementById("risultatoAccordi");
     const generaAccordiBtn = document.getElementById("generaAccordi");
 
-    // Recupera l'ultima progressione salvata
     const ultimaProgressione = localStorage.getItem("ultimaProgressione");
     if (ultimaProgressione) {
         risultato.innerHTML = ultimaProgressione;
     }
 
-    // Mappa delle progressioni armoniche
-    const progressioni = {
-        "maggiore": [
-            ["I", "IV", "V", "I"],
-            ["I", "V", "vi", "IV"],
-            ["ii", "V", "I", "vi"],
-            ["I", "vi", "IV", "V"]
-        ],
-        "minore": [
-            ["i", "iv", "V", "i"],
-            ["i", "VI", "III", "VII"],
-            ["i", "V", "VII", "IV"],
-            ["i", "iv", "VII", "III"]
-        ]
-    };
+    const gradiMaggiore = ["I", "ii", "iii", "IV", "V", "vi", "vii°"];
+    const gradiMinore = ["i", "ii°", "III", "iv", "v", "VI", "VII"];
 
-    // Definizione delle scale maggiori e minori con alterazioni corrette
     const tonalitaMaggiori = {
         "C": ["C", "D", "E", "F", "G", "A", "B"],
         "D": ["D", "E", "F#", "G", "A", "B", "C#"],
@@ -38,20 +23,54 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     const tonalitaMinori = {
-        "Cm": ["Cm", "D", "Eb", "F", "G", "Ab", "Bb"],
-        "Dm": ["Dm", "E", "F", "G", "A", "Bb", "C"],
-        "Em": ["Em", "F#", "G", "A", "B", "C", "D"],
-        "Fm": ["Fm", "G", "Ab", "Bb", "C", "Db", "Eb"],
-        "Gm": ["Gm", "A", "Bb", "C", "D", "Eb", "F"],
-        "Am": ["Am", "B", "C", "D", "E", "F", "G"],
-        "Bm": ["Bm", "C#", "D", "E", "F#", "G", "A"]
+        "Cm": ["C", "D", "Eb", "F", "G", "Ab", "Bb"],
+        "Dm": ["D", "E", "F", "G", "A", "Bb", "C"],
+        "Em": ["E", "F#", "G", "A", "B", "C", "D"],
+        "Fm": ["F", "G", "Ab", "Bb", "C", "Db", "Eb"],
+        "Gm": ["G", "A", "Bb", "C", "D", "Eb", "F"],
+        "Am": ["A", "B", "C", "D", "E", "F", "G"],
+        "Bm": ["B", "C#", "D", "E", "F#", "G", "A"]
     };
 
-    // Funzione per generare accordi
+    const accordiComuni = {
+        "I": chord => chord,
+        "ii": chord => chord + "m7",
+        "iii": chord => chord + "m7",
+        "IV": chord => chord + "maj7",
+        "V": chord => chord + "7",
+        "vi": chord => chord + "m",
+        "vii°": chord => chord + "dim",
+        "i": chord => chord + "m",
+        "ii°": chord => chord + "dim",
+        "III": chord => chord,
+        "iv": chord => chord + "m7",
+        "v": chord => chord + "m",
+        "VI": chord => chord,
+        "VII": chord => chord + "7"
+    };
+
+    const progressioniGenere = {
+        cantautorato: [["I", "V", "vi", "IV", "I", "IV", "V", "I"]],
+        pop: [["I", "V", "vi", "IV"], ["I", "vi", "IV", "V"], ["vi", "IV", "I", "V"]],
+        rock: [["I", "IV", "V", "I"], ["I", "bVII", "IV", "I"], ["I", "IV", "vi", "V"]],
+        jazz: [["ii", "V", "I", "vi", "ii", "V", "I"], ["I", "vi", "ii", "V7", "Imaj7"]]
+    };
+
+    function interscambioModale(scala, tipo) {
+        if (tipo === "maggiore") {
+            let scalaMinoreParallela = tonalitaMinori[scala[0] + "m"];
+            return scalaMinoreParallela || scala;
+        } else {
+            let tonica = scala[0].replace("m", "");
+            let scalaMaggioreParallela = tonalitaMaggiori[tonica];
+            return scalaMaggioreParallela || scala;
+        }
+    }
+
     function generaAccordi() {
         const tonalita = tonalitaSelect.value;
         const genere = genereSelect.value;
-        let tipo = tonalita.includes("m") ? "minore" : "maggiore";
+        const tipo = tonalita.includes("m") ? "minore" : "maggiore";
         let scala = tipo === "maggiore" ? tonalitaMaggiori[tonalita] : tonalitaMinori[tonalita];
 
         if (!scala) {
@@ -59,92 +78,41 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        let progressione = progressioni[tipo][Math.floor(Math.random() * progressioni[tipo].length)];
+        // Aggiunge varietà tramite interscambio modale
+        const scalaSecondaria = interscambioModale(scala, tipo);
+        const gradi = tipo === "maggiore" ? gradiMaggiore : gradiMinore;
+        let progressioni = progressioniGenere[genere] || [["I", "IV", "V", "I"]];
+
+        let progressione = progressioni[Math.floor(Math.random() * progressioni.length)];
         let accordi = progressione.map(grado => {
+            let base;
             switch (grado) {
-                case "I": return scala[0];
-                case "ii": return scala[1] + "m";
-                case "iii": return scala[2] + "m";
-                case "IV": return scala[3];
-                case "V": return scala[4];
-                case "vi": return scala[5] + "m";
-                case "VII": return scala[6];
-                case "i": return scala[0] + "m";
-                case "iv": return scala[3] + "m";
-                case "VI": return scala[5];
-                case "III": return scala[2];
-                default: return grado;
+                case "I": base = scala[0]; break;
+                case "ii": base = scala[1]; break;
+                case "iii": base = scala[2]; break;
+                case "IV": base = scala[3]; break;
+                case "V": base = scala[4]; break;
+                case "vi": base = scala[5]; break;
+                case "vii°": base = scala[6]; break;
+                case "i": base = scala[0]; break;
+                case "ii°": base = scala[1]; break;
+                case "III": base = scala[2]; break;
+                case "iv": base = scala[3]; break;
+                case "v": base = scala[4]; break;
+                case "VI": base = scala[5]; break;
+                case "VII": base = scala[6]; break;
+                case "bVII": base = scalaSecondaria[6]; break;
+                default: base = grado;
             }
+
+            const modifica = accordiComuni[grado];
+            return modifica ? modifica(base) : base;
         });
 
         let output = `<p>Progressione generata (${genere} - ${tonalita}):</p><h2>${accordi.join(" - ")}</h2>`;
-
-        // Mostra il risultato
         risultato.innerHTML = output;
-
-        // Salva la progressione nel Local Storage
         localStorage.setItem("ultimaProgressione", output);
     }
 
-    // Assegna l'evento al pulsante
     generaAccordiBtn.addEventListener("click", generaAccordi);
-});
-// Funzione per suonare gli accordi usando Tone.js
-async function suonaAccordi(accordi) {
-    await Tone.start(); // Necessario per l'audio nel browser
-
-    const synth = new Tone.PolySynth().toDestination();
-    const durata = "1n"; // durata di ogni accordo
-
-    // Sequenza: suona ogni accordo ogni secondo
-    let tempo = 0;
-    accordi.forEach(ac => {
-        const note = accordoToNote(ac);
-        synth.triggerAttackRelease(note, durata, Tone.now() + tempo);
-        tempo += 1;
-    });
-}
-
-// Converti un accordo in note
-function accordoToNote(ac) {
-    const baseNote = ac.replace(/m|#|b/g, '');
-    const isMinore = ac.includes("m");
-
-    const noteMap = {
-        "C": "C4", "C#": "C#4", "Db": "Db4",
-        "D": "D4", "D#": "D#4", "Eb": "Eb4",
-        "E": "E4", "F": "F4", "F#": "F#4", "Gb": "Gb4",
-        "G": "G4", "G#": "G#4", "Ab": "Ab4",
-        "A": "A4", "A#": "A#4", "Bb": "Bb4",
-        "B": "B4"
-    };
-
-    const root = noteMap[baseNote];
-    if (!root) return [baseNote + "4"];
-
-    // Intervalli per accordi
-    if (isMinore) {
-        return [root, Tone.Frequency(root).transpose(3).toNote(), Tone.Frequency(root).transpose(7).toNote()];
-    } else {
-        return [root, Tone.Frequency(root).transpose(4).toNote(), Tone.Frequency(root).transpose(7).toNote()];
-    }
-}
-
-// Salva gli accordi generati per poterli suonare
-let accordiCorrenti = [];
-
-function generaAccordi() {
-    // ... codice già esistente ...
-
-    accordiCorrenti = accordi; // Salva per ascolto
-    risultato.innerHTML = output;
-    localStorage.setItem("ultimaProgressione", output);
-}
-
-// Bottone per ascoltare
-const ascoltaBtn = document.getElementById("ascoltaAccordi");
-ascoltaBtn.addEventListener("click", () => {
-    if (accordiCorrenti.length > 0) {
-        suonaAccordi(accordiCorrenti);
-    }
 });
