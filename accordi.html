@@ -50,7 +50,14 @@
         <button id="generaAccordi">Genera Accordi</button>
 
         <div id="risultatoAccordi"></div>
-      
+      risultato.innerHTML = `
+    <p>Progressione generata (${genere} - ${tonalita}):</p>
+    <div style="margin-bottom: 0.5em;">${visualeHTML}</div>
+    <p style="font-size: 0.9em; color: #555;">Clicca su ogni accordo per ascoltarlo</p>
+    <button onclick='riproduciProgressione([${accordi.map(a => `"${a.playback}"`).join(",")}])'>
+        ▶️ Suona la progressione
+    </button>
+`;
     </main>
 
    <script src="https://unpkg.com/tone@14.7.77/build/Tone.js"></script>
