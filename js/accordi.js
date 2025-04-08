@@ -128,7 +128,6 @@ document.addEventListener("DOMContentLoaded", function () {
         risultato.innerHTML = `
             <p>Progressione generata (${genere} - ${tonalita}):</p>
             <div style="margin-bottom: 0.5em;">${visualeHTML}</div>
-            <p style="font-size: 1.5em; color: #555;">Non sai suonare?</p>
             <p style="font-size: 1.1em; font-weight: 500; color: #444;">🎵 Clicca su ogni accordo per ascoltarlo</p>
             <button onclick='riproduciProgressione([${playbackArray.join(",")}])'>▶️ Suona la progressione</button>
         `;
