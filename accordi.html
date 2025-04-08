@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generatore di Accordi</title>
-   <link rel="stylesheet" href="css/esercizi.css"> 
+    <link rel="stylesheet" href="css/esercizi.css"> 
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
 </head>
 <body>
     <button onclick="window.location.href='https://giuliavittoriacava.wixsite.com/ratatappbetaversion'" class="home-button">🏠 HOME</button>
+
     <nav class="tool-navigation">
-    <button onclick="window.location.href='blocco.html'">📝 Blocco-notes</button>
-    <button onclick="window.location.href='esercizi.html'">💡 Esercizi Creativi</button>
-    <button onclick="window.location.href='rimario.html'">🔤 Rimario</button>
-</nav>
+        <button onclick="window.location.href='blocco.html'">📝 Blocco-notes</button>
+        <button onclick="window.location.href='esercizi.html'">💡 Esercizi Creativi</button>
+        <button onclick="window.location.href='rimario.html'">🔤 Rimario</button>
+    </nav>
+
     <header>
         <h1>Generatore di Progressioni di Accordi</h1>
     </header>
@@ -46,10 +48,15 @@
         </select>
 
         <button id="generaAccordi">Genera Accordi</button>
-<div id="risultatoAccordi"></div>
+
+        <div id="risultatoAccordi"></div>
+        <button id="ascoltaAccordi">🎵 Ascolta Accordi</button>
     </main>
 
-   <script src="js/accordi.js"></script>
-</body>
+    <!-- Libreria per il suono degli accordi -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.39/Tone.js"></script>
 
+    <!-- Script personalizzato -->
+    <script src="js/accordi.js"></script>
+</body>
 </html>
