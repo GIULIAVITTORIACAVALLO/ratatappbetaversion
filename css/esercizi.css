@@ -103,3 +103,19 @@ ul#rime-assonanti li {
     color: #5a3e36;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
 }
+.accordo-btn {
+    background-color: #fdd9b5;
+    border: none;
+    margin: 5px;
+    padding: 10px 14px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.2em;
+    border-radius: 12px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.accordo-btn:hover {
+    background-color: #fcb07d;
+}
