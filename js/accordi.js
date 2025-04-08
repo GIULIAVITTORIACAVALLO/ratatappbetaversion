@@ -4,15 +4,30 @@ document.addEventListener("DOMContentLoaded", function () {
     const risultato = document.getElementById("risultatoAccordi");
     const generaAccordiBtn = document.getElementById("generaAccordi");
 
-    const enharmonicMap = {
-        "Bb": "A#",
-        "Db": "C#",
-        "Eb": "D#",
-        "Gb": "F#",
-        "Ab": "G#"
+    // Mappa progressioni per generi
+    const progressioniPerGenere = {
+        "pop": [
+            ["I", "V", "vi", "IV"],
+            ["vi", "IV", "I", "V"],
+            ["I", "vi", "ii", "V"]
+        ],
+        "rock": [
+            ["I", "bVII", "IV", "I"],
+            ["i", "bVI", "bIII", "bVII"],
+            ["I", "IV", "V", "bVII"]
+        ],
+        "cantautorato": [
+            ["I", "iii", "IV", "ii", "V", "I"],
+            ["I", "IV", "ii", "V", "iii", "vi", "IV", "V"]
+        ],
+        "jazz": [
+            ["ii7", "V7", "Imaj7", "vi7"],
+            ["Imaj7", "vi7", "ii7", "V7"],
+            ["iiø7", "V7", "i7", "bVImaj7"]
+        ]
     };
 
-    // Scales
+    // Scale con alterazioni
     const tonalitaMaggiori = {
         "C": ["C", "D", "E", "F", "G", "A", "B"],
         "D": ["D", "E", "F#", "G", "A", "B", "C#"],
@@ -33,85 +48,98 @@ document.addEventListener("DOMContentLoaded", function () {
         "Bm": ["B", "C#", "D", "E", "F#", "G", "A"]
     };
 
-    const progressioniPerGenere = {
-        "pop": [["I", "V", "vi", "IV", "I"], ["vi", "IV", "I", "V"]],
-        "rock": [["i", "bVII", "bVI", "V"], ["i", "iv", "bIII", "bVI", "V"]],
-        "jazz": [["ii7", "V7", "Imaj7", "vi7", "ii7", "V7", "Imaj7"]],
-        "cantautorato": [["I", "vi", "IV", "V", "iii", "vi", "ii", "V"]],
-        "classico": [["I", "IV", "V", "I", "vi", "ii", "V", "I"]],
-        "funk": [["I7", "IV7", "V7", "I7", "ii7", "V7", "I7"]],
+    const enharmonics = {
+        "Bb": "A#",
+        "Eb": "D#",
+        "Ab": "G#",
+        "Db": "C#",
+        "Gb": "F#",
+        "Cb": "B",
+        "Fb": "E",
+        "B#": "C",
+        "E#": "F"
     };
 
-    function gradoToAccordo(grado, scala) {
-        const gradi = {
-            "I": 0, "ii": 1, "iii": 2, "IV": 3, "V": 4, "vi": 5, "vii": 6,
-            "i": 0, "iv": 3, "v": 4, "bIII": 2, "bVI": 5, "bVII": 6
-        };
-
-        let index = gradi[grado.replace(/[7majmin]+/g, "")];
-        let nota = scala[index];
-        if (!nota) return grado;
-
-        let notazioneTone = enharmonicMap[nota] || nota;
-
-        let estensione = grado.match(/7|maj7|min7|dim|aug|sus[24]?/) || "";
-        let suffix = estensione[0] || "";
-
-        return {
-            visuale: nota + suffix,
-            playback: notazioneTone + suffix
-        };
+    function convertForPlayback(chord) {
+        return chord.replace(/[A-G](#|b)?/, match => enharmonics[match] || match);
     }
 
-    async function riproduciAccordo(nota) {
-        await Tone.start();
+    function suonaAccordo(nota) {
         const synth = new Tone.PolySynth().toDestination();
-        synth.triggerAttackRelease([nota, Tone.Frequency(nota).transpose(4), Tone.Frequency(nota).transpose(7)], "1n");
+        const now = Tone.now();
+        synth.triggerAttackRelease(nota + "3", "1n", now);
     }
 
-    async function riproduciProgressione(playbackArray) {
-        await Tone.start();
+    window.suonaAccordo = suonaAccordo;
+
+    function riproduciProgressione(noteArray) {
         const synth = new Tone.PolySynth().toDestination();
-        let delay = 0;
-        for (let nota of playbackArray) {
-            Tone.Transport.scheduleOnce((time) => {
-                synth.triggerAttackRelease([nota, Tone.Frequency(nota).transpose(4), Tone.Frequency(nota).transpose(7)], "1n", time);
-            }, delay);
-            delay += 1.5;
-        }
-        Tone.Transport.start("+0.1");
+        let now = Tone.now();
+        noteArray.forEach((nota, i) => {
+            synth.triggerAttackRelease(nota + "3", "1n", now + i);
+        });
     }
+
+    window.riproduciProgressione = riproduciProgressione;
 
     function generaAccordi() {
         const tonalita = tonalitaSelect.value;
         const genere = genereSelect.value;
-        let tipo = tonalita.includes("m") ? "minore" : "maggiore";
-        let scala = tipo === "maggiore" ? tonalitaMaggiori[tonalita] : tonalitaMinori[tonalita];
+        const isMinore = tonalita.includes("m");
+        const scala = isMinore ? tonalitaMinori[tonalita] : tonalitaMaggiori[tonalita];
+
         if (!scala) {
             risultato.innerHTML = "Errore: tonalità non trovata.";
             return;
         }
 
-        const progressioni = progressioniPerGenere[genere] || [["I", "V", "vi", "IV"]];
-        const scelta = progressioni[Math.floor(Math.random() * progressioni.length)];
+        const progressioni = progressioniPerGenere[genere] || [["I", "IV", "V", "I"]];
+        const progressione = progressioni[Math.floor(Math.random() * progressioni.length)];
 
-        const accordi = scelta.map(grado => gradoToAccordo(grado, scala));
-        let visualeHTML = accordi.map(acc =>
-            `<button class="accordo-btn" onclick="riproduciAccordo('${acc.playback}')">${acc.visuale}</button>`
-        ).join(" ");
+        const gradi = {
+            "I": 0, "ii": 1, "iii": 2, "IV": 3, "V": 4, "vi": 5, "vii": 6,
+            "i": 0, "iv": 3, "v": 4, "VI": 5, "III": 2, "VII": 6,
+            "bIII": 2, "bVI": 5, "bVII": 6, "ii7": 1, "V7": 4, "Imaj7": 0,
+            "vi7": 5, "iiø7": 1, "i7": 0, "bVImaj7": 5
+        };
+
+        const accordi = progressione.map(grado => {
+            let baseGrado = grado.replace(/[^A-Za-z]/g, "");
+            let index = gradi[baseGrado];
+            if (index === undefined) return grado;
+
+            let nota = scala[index];
+            if (!nota) return grado;
+
+            // Mantieni suffissi come m, 7, maj7
+            const suffisso = grado.replace(baseGrado, "");
+            return nota + suffisso;
+        });
+
+        let visualeHTML = "";
+        let playbackArray = [];
+
+        accordi.forEach(ac => {
+            const playback = convertForPlayback(ac);
+            playbackArray.push(`"${playback}"`);
+            visualeHTML += `<button onclick="suonaAccordo('${playback}')" class="accordo-btn">${ac}</button> `;
+        });
 
         risultato.innerHTML = `
             <p>Progressione generata (${genere} - ${tonalita}):</p>
-            <div style="margin-bottom: 1em;">${visualeHTML}</div>
-            <button onclick='riproduciProgressione([${accordi.map(a => `"${a.playback}"`).join(",")}])'>
-                ▶️ Suona la progressione
-            </button>
+            <div style="margin-bottom: 0.5em;">${visualeHTML}</div>
+            <p style="font-size: 1.1em; font-weight: 500; color: #444;">🎵 Clicca su ogni accordo per ascoltarlo</p>
+            <button onclick='riproduciProgressione([${playbackArray.join(",")}])'>▶️ Suona la progressione</button>
         `;
 
         localStorage.setItem("ultimaProgressione", risultato.innerHTML);
     }
 
+    // Caricamento progressione salvata
+    const ultimaProgressione = localStorage.getItem("ultimaProgressione");
+    if (ultimaProgressione) {
+        risultato.innerHTML = ultimaProgressione;
+    }
+
     generaAccordiBtn.addEventListener("click", generaAccordi);
-    window.riproduciAccordo = riproduciAccordo;
-    window.riproduciProgressione = riproduciProgressione;
 });
