@@ -119,3 +119,13 @@ ul#rime-assonanti li {
 .accordo-btn:hover {
     background-color: #fcb07d;
 }
+.accordo {
+    margin: 5px;
+    padding: 8px 12px;
+    border: none;
+    background-color: #f7d9c4;
+    border-radius: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+}
