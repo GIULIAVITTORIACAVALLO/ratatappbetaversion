@@ -2,71 +2,59 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generatore di Accordi</title>
-    <link rel="stylesheet" href="css/esercizi.css"> 
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/stile.css">
+    <script src="https://cdn.jsdelivr.net/npm/tone@latest"></script>
 </head>
 <body>
-    <button onclick="window.location.href='https://giuliavittoriacava.wixsite.com/ratatappbetaversion'" class="home-button">🏠 HOME</button>
-
-    <nav class="tool-navigation">
-        <button onclick="window.location.href='blocco.html'">📝 Blocco-notes</button>
-        <button onclick="window.location.href='esercizi.html'">💡 Esercizi Creativi</button>
-        <button onclick="window.location.href='rimario.html'">🔤 Rimario</button>
-    </nav>
-
-    <p style="font-size: 1.3em; color: #555;">Utilizza il generatore se non sai da che accordi partire!
-        Genera la progressione e suonala!</p>
-
+    <h1>Generatore di Progressioni Armoniche</h1>
     
-    <header>
-        <h1>Generatore di Progressioni di Accordi</h1>
-    </header>
+    <label for="tonalita">Tonalità:</label>
+    <select id="tonalita">
+        <option value="C">C</option>
+        <option value="G">G</option>
+        <option value="F">F</option>
+        <option value="D">D</option>
+        <option value="A">A</option>
+        <option value="E">E</option>
+        <option value="B">B</option>
+        <option value="Cm">Cm</option>
+        <option value="Gm">Gm</option>
+        <option value="Fm">Fm</option>
+        <option value="Dm">Dm</option>
+        <option value="Am">Am</option>
+        <option value="Em">Em</option>
+        <option value="Bm">Bm</option>
+    </select>
 
-    <main>
-        <label for="genere">Scegli un genere musicale:</label>
-        <select id="genere">
-            <option value="cantautorato">Cantautorato</option>
-            <option value="pop">Pop</option>
-            <option value="rock">Rock</option>
-            <option value="jazz">Jazz</option>
-        </select>
+    <label for="genere">Genere:</label>
+    <select id="genere">
+        <option value="pop">Pop</option>
+        <option value="rock">Rock</option>
+        <option value="jazz">Jazz</option>
+        <option value="cantautorato">Cantautorato</option>
+    </select>
 
-        <label for="tonalita">Scegli una tonalità:</label>
-        <select id="tonalita">
-            <option value="C">Do Maggiore</option>
-            <option value="Cm">Do Minore</option>
-            <option value="D">Re Maggiore</option>
-            <option value="Dm">Re Minore</option>
-            <option value="E">Mi Maggiore</option>
-            <option value="Em">Mi Minore</option>
-            <option value="F">Fa Maggiore</option>
-            <option value="Fm">Fa Minore</option>
-            <option value="G">Sol Maggiore</option>
-            <option value="Gm">Sol Minore</option>
-            <option value="A">La Maggiore</option>
-            <option value="Am">La Minore</option>
-            <option value="B">Si Maggiore</option>
-            <option value="Bm">Si Minore</option>
-        </select>
+    <label for="strumento">Strumento:</label>
+    <select id="strumento">
+        <option value="Synth">Synth</option>
+        <option value="Piano">Piano</option>
+        <option value="AMSynth">AMSynth</option>
+        <option value="FMSynth">FMSynth</option>
+    </select>
 
-        <button id="generaAccordi">Genera Accordi</button>
+    <label for="ottava">Ottava:</label>
+    <select id="ottava">
+        <option value="3">3</option>
+        <option value="4" selected>4</option>
+        <option value="5">5</option>
+    </select>
 
-        
-  <p style="font-size: 1.5em; color: #555;">Non sai suonare? Non preoccuparti!
-    👂🎼 </p>
+    <button id="generaAccordi">Genera Progressione</button>
+    <div id="risultatoAccordi"></div>
+    <p style="font-size: 1.2em; margin-top: 1em;"> Non sai suonare? 
+        🎼Clicca su ogni accordo per ascoltarlo👂</p>
 
-        
-        <div id="risultatoAccordi"></div>    
-  
-    </button>
-
-    </main>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.39/Tone.min.js"></script>
-
-    <!-- Script personalizzato -->
     <script src="js/accordi.js"></script>
 </body>
 </html>
