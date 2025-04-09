@@ -1,132 +1,119 @@
-
+/* Font calligrafico */
 body {
     font-family: 'Dancing Script', cursive;
     background-color: #fdf6f0;
-    color: #5c3a21;
+    color: #4b2e2e;
     text-align: center;
-    padding: 2rem;
+    padding: 2em;
+    margin: 0;
 }
 
-h1 {
-    color: #a65f4a;
+/* Titolo principale */
+header h1 {
     font-size: 3em;
-    margin-bottom: 1.5rem;
+    color: #a0522d;
+    margin-bottom: 1em;
 }
 
-button {
-    font-size: 1.1em;
-    padding: 0.6em 1.2em;
-    margin: 0.5em;
-    border: none;
-    border-radius: 25px;
-    background-color: #f4c9b7;
-    color: #5c3a21;
-    box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-button:hover {
-    background-color: #f1bca7;
-}
-
-textarea {
-    width: 90%;
-    max-width: 700px;
-    height: 200px;
-    margin-top: 1em;
-    padding: 1em;
-    border-radius: 15px;
-    border: 1px solid #d3a17e;
-    font-size: 1em;
-    font-family: 'Dancing Script', cursive;
-    background-color: #fffaf6;
-    color: #5c3a21;
-    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-}
-
-.home-button {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    background-color: #e6b7a9;
-    font-size: 1em;
-    padding: 0.5em 1em;
-}
-
-#timer, #parolaCasuale {
+/* Etichette e selezioni */
+label {
+    display: block;
+    margin-top: 1.5em;
     font-size: 1.5em;
-    margin: 1em 0;
-}
-.tool-navigation {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-    margin: 30px auto;
-    max-width: 90%;
 }
 
-.tool-navigation button {
-    font-family: 'Dancing Script', cursive;
-    background-color: #f7d6cb;
-    color: #5a3e36;
-    border: none;
-    border-radius: 25px;
-    padding: 10px 20px;
-    font-size: 18px;
-    cursor: pointer;
-    box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-.tool-navigation button:hover {
-    background-color: #f1b6a4;
-    transform: scale(1.05);
-}
-ul#rime-perfette,
-ul#rime-assonanti {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-ul#rime-perfette li,
-ul#rime-assonanti li {
-    background-color: #fceae8;
-    padding: 8px 12px;
-    border-radius: 15px;
-    font-size: 1.2rem;
-    font-family: 'Dancing Script', cursive;
-    color: #5a3e36;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
-}
-.accordo-btn {
-    background-color: #fdd9b5;
-    border: none;
-    margin: 5px;
-    padding: 10px 14px;
+select {
     font-family: 'Dancing Script', cursive;
     font-size: 1.2em;
-    border-radius: 12px;
-    box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+    padding: 0.4em;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff7f0;
+    color: #4b2e2e;
+    margin-top: 0.5em;
+}
+
+/* Bottone per generare */
+#generaAccordi {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.3em;
+    margin-top: 2em;
+    padding: 0.5em 1.2em;
+    background-color: #ffb6b6;
+    color: #4b2e2e;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-.accordo-btn:hover {
-    background-color: #fcb07d;
+#generaAccordi:hover {
+    background-color: #f28c8c;
 }
-.accordo {
-    margin: 5px;
-    padding: 8px 12px;
+
+/* Pulsanti degli accordi */
+.accordo-btn {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.3em;
+    margin: 0.3em;
+    padding: 0.5em 1em;
+    background-color: #ffe4d6;
     border: none;
-    background-color: #f7d9c4;
-    border-radius: 10px;
-    font-size: 1em;
+    border-radius: 15px;
+    color: #4b2e2e;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease;
+}
+
+.accordo-btn:hover {
+    transform: scale(1.05);
+    background-color: #ffd2c4;
+}
+
+/* Paragrafo istruzioni */
+p {
+    font-size: 1.2em;
+    margin-top: 2em;
+    color: #6d4c41;
+}
+
+/* Pulsante Home */
+.home-button {
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    background-color: #ffcccb;
+    color: #4b2e2e;
+    border: none;
+    border-radius: 15px;
+    padding: 0.4em 1em;
+    font-size: 1em;
+    font-family: 'Dancing Script', cursive;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+/* Navigazione strumenti */
+.tool-navigation {
+    margin-top: 1em;
+}
+
+.tool-navigation button {
+    background-color: #f9d5d3;
+    border: none;
+    border-radius: 15px;
+    padding: 0.4em 1em;
+    margin: 0.5em;
+    font-size: 1.1em;
+    font-family: 'Dancing Script', cursive;
+    color: #4b2e2e;
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.tool-navigation button:hover {
+    background-color: #f7bfbf;
 }
