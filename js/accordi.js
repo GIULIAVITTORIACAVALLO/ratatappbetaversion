@@ -6,73 +6,47 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const synth = new Tone.PolySynth(Tone.Synth).toDestination();
 
-    const noteMap = {
-        "Bb": "A#",
-        "Db": "C#",
-        "Eb": "D#",
-        "Gb": "F#",
-        "Ab": "G#"
-    };
-
-    function normalizzaAccordo(acc) {
-        return acc in noteMap ? noteMap[acc] : acc;
-    }
-
     const accordiBase = {
         "C": ["C4", "E4", "G4"],
         "Cm": ["C4", "Eb4", "G4"],
-        "C#": ["C#4", "F4", "G#4"],
-        "C#m": ["C#4", "E4", "G#4"],
         "D": ["D4", "F#4", "A4"],
         "Dm": ["D4", "F4", "A4"],
-        "D#": ["D#4", "G4", "A#4"],
-        "D#m": ["D#4", "F#4", "A#4"],
         "E": ["E4", "G#4", "B4"],
         "Em": ["E4", "G4", "B4"],
         "F": ["F4", "A4", "C5"],
         "Fm": ["F4", "Ab4", "C5"],
-        "F#": ["F#4", "A#4", "C#5"],
-        "F#m": ["F#4", "A4", "C#5"],
         "G": ["G4", "B4", "D5"],
         "Gm": ["G4", "Bb4", "D5"],
-        "G#": ["G#4", "C5", "D#5"],
-        "G#m": ["G#4", "B4", "D#5"],
         "A": ["A3", "C#4", "E4"],
         "Am": ["A3", "C4", "E4"],
-        "A#": ["A#3", "D4", "F4"],
-        "A#m": ["A#3", "C#4", "F4"],
         "B": ["B3", "D#4", "F#4"],
         "Bm": ["B3", "D4", "F#4"]
     };
 
     const progressioni = {
         cantautorato: [
+            ["I", "IV", "V", "I"],
             ["I", "vi", "IV", "V"],
-            ["I", "iii", "vi", "IV", "V"],
             ["ii", "V", "I", "vi"],
-            ["I", "IV", "V", "IV", "I"],
-            ["vi", "ii", "V", "I"]
+            ["I", "iii", "vi", "IV", "V"]
         ],
         pop: [
             ["I", "V", "vi", "IV"],
             ["vi", "IV", "I", "V"],
             ["I", "V", "vi", "iii", "IV"],
-            ["I", "V", "IV", "IV"],
-            ["IV", "I", "V", "vi"]
+            ["I", "V", "IV", "IV"]
         ],
         rock: [
             ["I", "bVII", "IV", "I"],
             ["I", "IV", "V", "IV"],
             ["I", "V", "bVII", "IV"],
-            ["I", "IV", "vi", "V"],
-            ["bVII", "IV", "I", "V"]
+            ["I", "IV", "vi", "V"]
         ],
         jazz: [
             ["ii", "V", "I", "vi"],
             ["I", "vi", "ii", "V"],
             ["ii", "V", "iii", "vi", "ii", "V", "I"],
-            ["I", "IV", "iii", "vi", "ii", "V", "I"],
-            ["I", "bIII", "IV", "bVI", "ii", "V", "I"]
+            ["I", "IV", "iii", "vi", "ii", "V", "I"]
         ]
     };
 
@@ -97,9 +71,10 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     function playAccordo(nomeAccordo) {
-        const acc = normalizzaAccordo(nomeAccordo);
-        const note = accordiBase[acc];
-        if (note) synth.triggerAttackRelease(note, "1n");
+        const note = accordiBase[nomeAccordo];
+        if (note) {
+            synth.triggerAttackRelease(note, "1n");
+        }
     }
 
     function generaAccordi() {
@@ -112,8 +87,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const progression = progressioniGenere[Math.floor(Math.random() * progressioniGenere.length)];
 
         const gradi = {
-            "I": 0, "ii": 1, "iii": 2, "IV": 3, "V": 4, "vi": 5, "vii": 6,
-            "i": 0, "iv": 3, "v": 4, "bVII": 6, "bIII": 2, "bVI": 5
+            "I": 0, "ii": 1, "iii": 2, "IV": 3, "V": 4, "vi": 5, "VII": 6,
+            "i": 0, "iv": 3, "v": 4, "bVII": 6
         };
 
         const accordi = progression.map(grado => {
@@ -130,8 +105,15 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         risultato.innerHTML = outputHTML;
+        localStorage.setItem("ultimaProgressione", outputHTML);
     }
 
     window.playAccordo = playAccordo;
     generaAccordiBtn.addEventListener("click", generaAccordi);
+
+    // Carica la progressione salvata, se c'è
+    const ultima = localStorage.getItem("ultimaProgressione");
+    if (ultima) {
+        risultato.innerHTML = ultima;
+    }
 });
