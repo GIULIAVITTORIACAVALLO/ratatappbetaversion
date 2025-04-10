@@ -4,10 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const risultato = document.getElementById("risultatoAccordi");
     const generaAccordiBtn = document.getElementById("generaAccordi");
 
-    // Suono tipo Rhodes (più caldo)
     const synth = new Tone.PolySynth(Tone.FMSynth).toDestination();
 
-    // Accordi più estesi
     const accordiEstesi = {
         "C": ["C4", "E4", "G4"],
         "Cm": ["C4", "Eb4", "G4"],
@@ -15,18 +13,35 @@ document.addEventListener("DOMContentLoaded", function () {
         "Cm7": ["C4", "Eb4", "G4", "Bb4"],
         "Cmaj7": ["C4", "E4", "G4", "B4"],
         "C9": ["C4", "E4", "G4", "Bb4", "D5"],
+
+        "Db": ["Db4", "F4", "Ab4"],
+        "Dbm": ["Db4", "E4", "Ab4"],
         "D": ["D4", "F#4", "A4"],
         "Dm": ["D4", "F4", "A4"],
         "D7": ["D4", "F#4", "A4", "C5"],
+
+        "Eb": ["Eb4", "G4", "Bb4"],
+        "Ebm": ["Eb4", "Gb4", "Bb4"],
         "E": ["E4", "G#4", "B4"],
         "Em": ["E4", "G4", "B4"],
+
         "F": ["F4", "A4", "C5"],
         "Fm": ["F4", "Ab4", "C5"],
+        "F#": ["F#4", "A#4", "C#5"],
+        "F#m": ["F#4", "A4", "C#5"],
+
+        "Gb": ["Gb4", "Bb4", "Db5"],
+        "Gbm": ["Gb4", "A4", "Db5"],
         "G": ["G3", "B3", "D4"],
         "Gm": ["G3", "Bb3", "D4"],
         "G7": ["G3", "B3", "D4", "F4"],
+        "Ab": ["Ab3", "C4", "Eb4"],
+        "Abm": ["Ab3", "B4", "Eb4"],
+
         "A": ["A3", "C#4", "E4"],
         "Am": ["A3", "C4", "E4"],
+        "Bb": ["Bb3", "D4", "F4"],
+        "Bbm": ["Bb3", "Db4", "F4"],
         "B": ["B3", "D#4", "F#4"],
         "Bm": ["B3", "D4", "F#4"]
     };
