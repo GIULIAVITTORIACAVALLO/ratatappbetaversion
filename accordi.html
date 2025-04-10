@@ -6,6 +6,61 @@
     <title>Generatore di Accordi</title>
     <link rel="stylesheet" href="css/esercizi.css"> 
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Dancing Script', cursive;
+            background-color: #fffaf3;
+            color: #5a3e36;
+            text-align: center;
+            padding: 2em;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #d17a5d;
+            margin-bottom: 1em;
+        }
+
+        select, button {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.2em;
+            padding: 0.5em 1em;
+            margin: 1em;
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background-color: #f7d7c4;
+            color: #5a3e36;
+            cursor: pointer;
+        }
+
+        .accordo-btn {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.3em;
+            margin: 0.3em;
+            padding: 0.5em 1.2em;
+            border-radius: 10px;
+            border: 1px solid #e5b89e;
+            background-color: #fff1e6;
+            color: #5a3e36;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .accordo-btn:hover {
+            background-color: #f7c9b0;
+        }
+
+        .tool-navigation {
+            margin-bottom: 1em;
+        }
+
+        .home-button {
+            position: absolute;
+            top: 1em;
+            left: 1em;
+            background-color: #fdd9c0;
+        }
+    </style>
 </head>
 <body>
     <button onclick="window.location.href='https://giuliavittoriacava.wixsite.com/ratatappbetaversion'" class="home-button">🏠 HOME</button>
@@ -51,15 +106,10 @@
 
         <div id="risultatoAccordi"></div>
     
-    <p style="font-size: 1.4em; color: #555;">Clicca su ogni accordo per ascoltarlo</p>
-   
-    </button>
-
+        <p style="font-size: 1.4em; color: #555;">Clicca su ogni accordo per ascoltarlo</p>
     </main>
 
-   <script src="https://unpkg.com/tone@14.7.77/build/Tone.js"></script>
-
-    <!-- Script personalizzato -->
+    <script src="https://unpkg.com/tone@14.7.77/build/Tone.js"></script>
     <script src="js/accordi.js"></script>
 </body>
 </html>
